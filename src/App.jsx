@@ -13,7 +13,7 @@ import Portfolio from "./Pages/Portfolio";
 
 function App() {
   return (
-    <SplashCurtain duration={1800}>
+    <SplashCurtain duration={900}>
       <Navbar />
       <Routes>
         <Route
