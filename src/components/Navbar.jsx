@@ -18,25 +18,39 @@ export default function Navbar() {
 
   // 🔥 Section navigation
   const goTo = (path, id = null) => {
+    // If we're already on the target page
     if (window.location.pathname === path) {
       if (id) {
+        // If an ID is provided, scroll to that element
         const el = document.getElementById(id);
-        if (el) el.scrollIntoView({ behavior: "smooth" });
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        } else {
+          // If element not found, scroll to top
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      } else {
+        // No ID provided, scroll to top
+        window.scrollTo({ top: 0, behavior: "smooth" });
       }
     } else {
+      // Navigating to a different page
       navigate(path);
+      // Wait for page to render then scroll to top or element
       setTimeout(() => {
         if (id) {
           const el = document.getElementById(id);
-          if (el) el.scrollIntoView({ behavior: "smooth" });
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+          } else {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }
+        } else {
+          window.scrollTo({ top: 0, behavior: "smooth" });
         }
       }, 100);
     }
-
-    setActive(id || "home");
-    setMenuOpen(false);
   };
-
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-[#fffbf5]/80 backdrop-blur-md border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
@@ -60,20 +74,20 @@ export default function Navbar() {
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
 
           {/* ✅ HOME (ONLY NAVIGATE) */}
-         <button
-  onClick={() => {
-    if (window.location.pathname === "/") {
-      // already on home → scroll to top
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    } else {
-      navigate("/");
-    }
-    setActive("home");
-  }}
-  className={active === "home" ? "text-[#00b8a9]" : "hover:text-gray-900"}
->
-  Home
-</button>
+          <button
+            onClick={() => {
+              if (window.location.pathname === "/") {
+                // already on home → scroll to top
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              } else {
+                navigate("/");
+              }
+              setActive("home");
+            }}
+            className={active === "home" ? "text-[#00b8a9]" : "hover:text-gray-900"}
+          >
+            Home
+          </button>
 
           {/* Sections */}
           <button
@@ -84,17 +98,20 @@ export default function Navbar() {
           </button>
 
           <button
-            onClick={() => goTo("/portfolio", "portfolio")}
+            onClick={() => {
+              goTo("/portfolio", "portfolio");
+              window.scrollTo(0, 0);
+            }}
             className={active === "portfolio" ? "text-[#00b8a9]" : "hover:text-gray-900"}
           >
             Portfolio
           </button>
-
           {/* About Page */}
           <button
             onClick={() => {
               navigate("/about");
               setActive("");
+              window.scrollTo(0, 0); // Scroll to top
             }}
             className="hover:text-gray-900"
           >
@@ -107,6 +124,7 @@ export default function Navbar() {
         <button
           onClick={() => goTo("/contact", "contact")}
           className="hidden md:block bg-[#00b8a9] text-white px-5 py-2 rounded-full text-sm"
+
         >
           Contact
         </button>
