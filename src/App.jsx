@@ -10,10 +10,11 @@ import SplashCurtain from "./components/loader";
 
 import { Routes, Route } from "react-router-dom";
 import Portfolio from "./Pages/Portfolio";
+import Contact from "./Pages/Contact";
 
 function App() {
   return (
-    <SplashCurtain duration={900}>
+    <SplashCurtain duration={2600}>
       <Navbar />
       <Routes>
         <Route
@@ -30,6 +31,7 @@ function App() {
         />
         <Route path="/about" element={<Aboutus />} />
         <Route path="/portfolio" element={<Portfolio />} />
+        <Route path ="/contact" element={<Contact />} />
       </Routes>
       <Footer />
     </SplashCurtain>

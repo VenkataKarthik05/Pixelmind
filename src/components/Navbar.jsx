@@ -105,7 +105,7 @@ export default function Navbar() {
 
         {/* Contact */}
         <button
-          onClick={() => goTo("/", "contact")}
+          onClick={() => goTo("/contact", "contact")}
           className="hidden md:block bg-[#00b8a9] text-white px-5 py-2 rounded-full text-sm"
         >
           Contact
@@ -135,7 +135,7 @@ export default function Navbar() {
             Services
           </button>
 
-          <button onClick={() => goTo("/", "portfolio")} className="text-left">
+          <button onClick={() => goTo("/portfolio", "portfolio")} className="text-left">
             Portfolio
           </button>
 
@@ -150,7 +150,7 @@ export default function Navbar() {
           </button>
 
           <button
-            onClick={() => goTo("/", "contact")}
+            onClick={() => goTo("/contact", "contact")}
             className="mt-2 bg-[#00b8a9] text-white py-2 rounded-full"
           >
             Contact

@@ -91,6 +91,57 @@ const STYLES = `
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .anim-fadeDown {
+    padding: 1rem 1.25rem !important;
+  }
+  
+  .card-icon-wrap {
+    width: 38px !important;
+    height: 38px !important;
+  }
+  
+  .result-num {
+    font-size: 1.4rem !important;
+  }
+  
+  .view-arrow span {
+    font-size: 0.65rem !important;
+  }
+  
+  .cta-btn {
+    padding: 0.4rem 1rem !important;
+    font-size: 0.75rem !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .nav-link {
+    font-size: 0.7rem !important;
+  }
+  
+  .tag-chip {
+    font-size: 0.6rem !important;
+    padding: 2px 6px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .stat-card {
+    padding: 1rem 0.75rem !important;
+  }
+  
+  .stat-card div:first-child {
+    font-size: 1.3rem !important;
+  }
+  
+  .filter-btn {
+    padding: 0.35rem 1rem !important;
+    font-size: 0.7rem !important;
+  }
+}
 `;
 
 const projects = [
