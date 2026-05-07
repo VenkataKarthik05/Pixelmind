@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import Aboutus from "./Pages/About Us";
 import WhyChooseus from "./components/WhyChooseus";
 import SplashCurtain from "./components/loader";
+import WhatsAppButton from "./components/Whatsapp"; 
 
 import { Routes, Route } from "react-router-dom";
 import Portfolio from "./Pages/Portfolio";
@@ -31,9 +32,12 @@ function App() {
         />
         <Route path="/about" element={<Aboutus />} />
         <Route path="/portfolio" element={<Portfolio />} />
-        <Route path ="/contact" element={<Contact />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
       <Footer />
+      
+      {/* Add WhatsApp button here - it will appear on all pages */}
+      <WhatsAppButton />
     </SplashCurtain>
   );
 }

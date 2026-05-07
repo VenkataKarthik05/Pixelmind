@@ -54,10 +54,6 @@ const STYLES = `
   }
 }
 
-@keyframes dashDraw {
-  to { stroke-dashoffset: 0; }
-}
-
 @keyframes orbitRing {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
@@ -79,9 +75,15 @@ const STYLES = `
   100% { transform: scale(1); opacity: 0.6; }
 }
 
-@keyframes rotateLogo {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+@keyframes loadingDot {
+  0%, 100% { 
+    box-shadow: 0 0 20px rgba(20,184,166,0.3), 0 0 40px rgba(20,184,166,0.1);
+    transform: scale(1);
+  }
+  50% { 
+    box-shadow: 0 0 50px rgba(20,184,166,0.6), 0 0 80px rgba(20,184,166,0.2);
+    transform: scale(1.05);
+  }
 }
 
 .gradient-text {
@@ -94,11 +96,11 @@ const STYLES = `
 }
 
 .loading-dot {
-  animation: pulseGlow 1.5s ease-in-out infinite;
+  animation: loadingDot 1.5s ease-in-out infinite;
 }
 `;
 
-// Logo SVG Component - moved outside to prevent recreation during render
+// Logo SVG Component
 const Logo = () => (
   <svg width="80" height="80" viewBox="0 0 100 100" fill="none">
     {/* Outer Grid Dots */}
@@ -157,7 +159,7 @@ const Logo = () => (
       <animate attributeName="opacity" values="0.8;0.3;0.8" dur="1.5s" delay="0.4s" repeatCount="indefinite" />
     </rect>
 
-    {/* Main "P" Shape with glow animation */}
+    {/* Main "P" Shape */}
     <path
       d="M30 25 H60 
          Q75 25 75 40 
@@ -222,32 +224,19 @@ export default function SplashCurtain({ children, duration = 2600 }) {
 
   return (
     <>
-      {/* Splash Screen */}
+      {/* Splash Screen - Pure Tailwind CSS */}
       <div
-        style={{
-          position: "fixed",
-          inset: 0,
-          zIndex: 9999,
-          background: "radial-gradient(circle at center, #0a0f0d 0%, #060807 100%)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          animation: !isLoading ? "curtainUp 0.8s cubic-bezier(0.76,0,0.24,1) both" : "none",
-          overflow: "hidden",
-        }}
+        className={`fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden
+          bg-gradient-to-br from-[#0a0f0d] to-[#060807]
+          ${!isLoading ? 'animate-[curtainUp_0.8s_cubic-bezier(0.76,0,0.24,1)_both]' : ''}`}
       >
-        {/* Animated Gradient Overlay */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: "radial-gradient(circle at 50% 50%, rgba(20,184,166,0.03) 0%, transparent 70%)",
-            pointerEvents: "none",
-          }}
+        {/* Animated Gradient Overlay - Tailwind with custom radial gradient */}
+        <div 
+          className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(20,184,166,0.03)_0%,transparent_70%)] pointer-events-none" 
         />
 
-        {/* Grid Background */}
-        <svg style={{ position: "absolute", inset: 0, width: "100%", height: "100%", opacity: 0.03 }}>
+        {/* Grid Background SVG - Pure Tailwind sizing */}
+        <svg className="absolute inset-0 w-full h-full opacity-[0.03]">
           <defs>
             <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
               <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#14b8a6" strokeWidth="0.5"/>
@@ -261,16 +250,14 @@ export default function SplashCurtain({ children, duration = 2600 }) {
         {particles.right.map((p) => (
           <div
             key={`right-${p.id}`}
+            className="absolute rounded-full blur-[1px]"
             style={{
-              position: "absolute",
               left: `${p.left}%`,
               top: "100%",
               width: `${p.size}px`,
               height: `${p.size}px`,
-              background: `rgba(20,184,166,${p.opacity})`,
-              borderRadius: "50%",
+              backgroundColor: `rgba(20,184,166,${p.opacity})`,
               animation: `particleFloat ${p.duration}s ease-out ${p.delay}s infinite`,
-              filter: "blur(1px)",
             }}
           />
         ))}
@@ -279,89 +266,54 @@ export default function SplashCurtain({ children, duration = 2600 }) {
         {particles.left.map((p) => (
           <div
             key={`left-${p.id}`}
+            className="absolute rounded-full blur-[1px]"
             style={{
-              position: "absolute",
               right: `${p.left}%`,
               top: "100%",
               width: `${p.size}px`,
               height: `${p.size}px`,
-              background: `rgba(20,184,166,${p.opacity * 0.7})`,
-              borderRadius: "50%",
+              backgroundColor: `rgba(20,184,166,${p.opacity * 0.7})`,
               animation: `particleFloatLeft ${p.duration}s ease-out ${p.delay + 0.5}s infinite`,
-              filter: "blur(1px)",
             }}
           />
         ))}
 
         {/* Outer Ring */}
-        <div
-          style={{
-            position: "absolute",
-            width: "450px",
-            height: "450px",
-            borderRadius: "50%",
-            border: "1px solid rgba(20,184,166,0.1)",
-            animation: "spinSlow 12s linear infinite",
-          }}
-        >
+        <div className="absolute w-[450px] h-[450px] rounded-full border border-teal-400/10 animate-[spinSlow_12s_linear_infinite]">
           {/* Orbiting stars on outer ring */}
           {[...Array(12)].map((_, i) => (
             <div
               key={i}
+              className="absolute w-[3px] h-[3px] bg-teal-400 rounded-full opacity-60"
               style={{
-                position: "absolute",
-                width: "3px",
-                height: "3px",
-                background: "#14b8a6",
-                borderRadius: "50%",
                 top: "50%",
                 left: "50%",
                 transform: `rotate(${i * 30}deg) translate(225px, 0)`,
-                opacity: 0.6,
               }}
             />
           ))}
         </div>
 
         {/* Middle Ring */}
-        <div
-          style={{
-            position: "absolute",
-            width: "350px",
-            height: "350px",
-            borderRadius: "50%",
-            border: "1.5px solid rgba(20,184,166,0.15)",
-            animation: "spinReverse 8s linear infinite",
-          }}
-        >
+        <div className="absolute w-[350px] h-[350px] rounded-full border-[1.5px] border-teal-400/15 animate-[spinReverse_8s_linear_infinite]">
           {/* Orbiting dots on middle ring */}
           {[...Array(8)].map((_, i) => (
             <div
               key={i}
+              className="absolute w-1.5 h-1.5 rounded-full"
               style={{
-                position: "absolute",
-                width: "6px",
-                height: "6px",
                 background: "linear-gradient(135deg, #14b8a6, #2dd4bf)",
-                borderRadius: "50%",
+                boxShadow: "0 0 10px rgba(20,184,166,0.5)",
                 top: "50%",
                 left: "50%",
                 transform: `rotate(${i * 45}deg) translate(175px, 0)`,
-                boxShadow: "0 0 10px rgba(20,184,166,0.5)",
               }}
             />
           ))}
         </div>
 
         {/* Inner Dashed Ring */}
-        <svg
-          style={{
-            position: "absolute",
-            width: "280px",
-            height: "280px",
-            animation: "orbitRing 5s linear infinite",
-          }}
-        >
+        <svg className="absolute w-[280px] h-[280px] animate-[orbitRing_5s_linear_infinite]">
           <circle
             cx="140"
             cy="140"
@@ -386,96 +338,41 @@ export default function SplashCurtain({ children, duration = 2600 }) {
         </svg>
 
         {/* Center Glow */}
-        <div
-          style={{
-            position: "absolute",
-            width: "200px",
-            height: "200px",
-            borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(20,184,166,0.15) 0%, rgba(20,184,166,0) 70%)",
-            animation: "pulseGlow 2s ease-in-out infinite",
-          }}
-        />
+        <div className="absolute w-[200px] h-[200px] rounded-full bg-[radial-gradient(circle,rgba(20,184,166,0.15)_0%,rgba(20,184,166,0)_70%)] animate-[pulseGlow_2s_ease-in-out_infinite]" />
 
         {/* Main Logo Container */}
-        <div
-          style={{
-            textAlign: "center",
-            zIndex: 10,
-            position: "relative",
-          }}
-        >
+        <div className="text-center z-10 relative">
           {/* Animated Logo */}
-          <div
-            style={{
-              marginBottom: "2rem",
-              animation: "iconBounce 2s ease-in-out infinite",
-              cursor: "pointer",
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
+          <div className="mb-8 animate-[iconBounce_2s_ease-in-out_infinite] cursor-pointer flex justify-center">
             <Logo />
           </div>
 
           {/* Main Text */}
-          <div
-            style={{
-              fontSize: "clamp(2rem,6vw,3.8rem)",
-              fontWeight: 700,
-              fontFamily: "'Georgia', serif",
-              animation: "logoReveal 1.2s cubic-bezier(0.34,1.56,0.64,1) both",
-              textAlign: "center",
-            }}
-          >
+          <div className="text-[clamp(2rem,6vw,3.8rem)] font-bold text-center font-serif animate-[logoReveal_1.2s_cubic-bezier(0.34,1.56,0.64,1)_both]">
             <span className="gradient-text">PixelMind</span>
-            <span style={{ color: "white" }}> </span>
-            <span style={{ color: "rgba(255,255,255,0.8)" }}>Solutions</span>
+            <span className="text-white"> </span>
+            <span className="text-white/80">Solutions</span>
           </div>
 
           {/* Tagline */}
-          <div
-            style={{
-              marginTop: "1rem",
-              fontFamily: "system-ui, sans-serif",
-              fontSize: "0.85rem",
-              color: "rgba(20,184,166,0.9)",
-              letterSpacing: "0.3em",
-              textTransform: "uppercase",
-              animation: "fadeInUp 0.8s ease 0.5s both",
-            }}
-          >
+          <div className="mt-4 font-sans text-[0.85rem] text-teal-400/90 tracking-[0.3em] uppercase animate-[fadeInUp_0.8s_ease_0.5s_both]">
             Digital Marketing · Hyderabad
           </div>
 
           {/* Loading Dots */}
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              gap: "12px",
-              marginTop: "2rem",
-              animation: "fadeInUp 0.8s ease 0.7s both",
-            }}
-          >
+          <div className="flex justify-center gap-3 mt-8 animate-[fadeInUp_0.8s_ease_0.7s_both]">
             {[...Array(3)].map((_, i) => (
               <div
                 key={i}
-                className="loading-dot"
-                style={{
-                  width: "8px",
-                  height: "8px",
-                  background: "#14b8a6",
-                  borderRadius: "50%",
-                  animationDelay: `${i * 0.2}s`,
-                }}
+                className="loading-dot w-2 h-2 bg-teal-400 rounded-full"
+                style={{ animationDelay: `${i * 0.2}s` }}
               />
             ))}
           </div>
         </div>
 
         {/* Corner Decorations */}
-        <div style={{ position: "absolute", top: 30, left: 30, opacity: 0.3 }}>
+        <div className="absolute top-7 left-7 opacity-30">
           <svg width="60" height="60" viewBox="0 0 100 100">
             <path d="M0 80 L0 0 L80 0" fill="none" stroke="#14b8a6" strokeWidth="1.5" />
             <circle cx="0" cy="80" r="3" fill="#14b8a6" />
@@ -483,7 +380,7 @@ export default function SplashCurtain({ children, duration = 2600 }) {
           </svg>
         </div>
 
-        <div style={{ position: "absolute", bottom: 30, right: 30, opacity: 0.3 }}>
+        <div className="absolute bottom-7 right-7 opacity-30">
           <svg width="60" height="60" viewBox="0 0 100 100">
             <path d="M100 20 L100 100 L20 100" fill="none" stroke="#14b8a6" strokeWidth="1.5" />
             <circle cx="100" cy="20" r="3" fill="#14b8a6" />
@@ -492,26 +389,14 @@ export default function SplashCurtain({ children, duration = 2600 }) {
         </div>
 
         {/* Bottom Gradient Line */}
-        <div
-          style={{
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            height: "2px",
-            background: "linear-gradient(90deg, transparent, #14b8a6, #2dd4bf, #14b8a6, transparent)",
-            animation: "shimmer 2s linear infinite",
-          }}
-        />
+        <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-teal-400 to-transparent animate-[shimmer_2s_linear_infinite]" />
       </div>
 
       {/* Main Content */}
       <div
-        style={{
-          opacity: isLoading ? 0 : 1,
-          transition: "opacity 0.8s ease-in-out",
-          minHeight: "100vh",
-        }}
+        className={`transition-opacity duration-700 ease-in-out min-h-screen ${
+          isLoading ? 'opacity-0' : 'opacity-100'
+        }`}
       >
         {children}
       </div>

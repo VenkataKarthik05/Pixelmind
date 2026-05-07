@@ -25,9 +25,9 @@ const scaleIn = (delay = 0) => ({
 /* ── word-split headline ── */
 function SplitWord({ word, delay }) {
   return (
-    <span style={{ display: "inline-block", overflow: "hidden", lineHeight: 1.05 }}>
+    <span className="inline-block overflow-hidden leading-[1.05]">
       <motion.span
-        style={{ display: "inline-block" }}
+        className="inline-block"
         variants={{
           hidden: { y: "110%", opacity: 0 },
           show:   { y: "0%",   opacity: 1, transition: { duration: 0.7, ease: EASE, delay } },
@@ -43,23 +43,16 @@ function SplitWord({ word, delay }) {
 function Bar({ h, active, lbl, delay }) {
   return (
     <div className="flex-1 flex flex-col items-center gap-1">
-      <div style={{ height: 70, display: "flex", alignItems: "flex-end", width: "100%" }}>
+      <div className="h-[70px] flex items-end w-full">
         <motion.div
-          style={{
-            background: active
-              ? "linear-gradient(180deg, #8b5cf6, #5b5ef4)"
-              : "rgba(99,102,241,0.15)",
-            boxShadow: active ? "0 0 10px rgba(91,94,244,0.3)" : "none",
-            width: "100%",
-            borderRadius: "6px 6px 0 0",
-          }}
+          className={`w-full rounded-t-md ${active ? 'bg-gradient-to-b from-purple-500 to-indigo-600 shadow-[0_0_10px_rgba(91,94,244,0.3)]' : 'bg-indigo-500/15'}`}
           initial={{ height: 0 }}
           animate={{ height: h }}
           transition={{ duration: 0.6, ease: EASE, delay }}
         />
       </div>
       <motion.span
-        style={{ fontSize: "0.6rem", color: "#9ca3af", fontWeight: 500 }}
+        className="text-[0.6rem] text-gray-400 font-medium"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: delay + 0.3 }}
@@ -88,8 +81,38 @@ function DonutArc({ stroke, dash, offset, delay }) {
   );
 }
 
+/* ── Wavy Background Component ── */
+function WavyBg() {
+  return (
+    <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+      {/* Base gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-stone-50 to-indigo-50" />
+      
+      {/* Animated blobs */}
+      <div className="absolute -top-[10%] -right-[5%] w-[55vw] h-[55vw] rounded-full bg-gradient-radial from-amber-200/55 via-amber-200/30 to-transparent animate-blob" />
+      <div className="absolute bottom-[5%] -left-[8%] w-[50vw] h-[50vw] rounded-full bg-gradient-radial from-indigo-200/40 via-indigo-200/20 to-transparent animate-blob2" />
+      <div className="absolute top-[40%] left-[30%] w-[40vw] h-[40vw] rounded-full bg-gradient-radial from-emerald-200/35 via-emerald-200/15 to-transparent animate-blob" />
+      
+      {/* SVG Waves */}
+      <div className="absolute top-0 left-0 w-[200%] h-screen overflow-hidden">
+        <svg className="w-full h-full" viewBox="0 0 2880 900" preserveAspectRatio="none">
+          <path d="M-100,200 C200,120 400,280 700,200 C1000,120 1200,260 1540,180 C1840,100 2040,260 2340,180 C2640,100 2740,220 2980,180" fill="none" stroke="#c9a96e" strokeWidth="1" strokeOpacity="0.22"/>
+          <path d="M-100,310 C150,220 350,390 650,290 C950,190 1150,370 1540,280 C1840,190 2040,370 2340,280 C2640,190 2780,340 2980,280" fill="none" stroke="#c9a96e" strokeWidth="0.7" strokeOpacity="0.15"/>
+          <path d="M-100,440 C250,360 500,520 800,420 C1100,320 1280,480 1540,400 C1840,320 2040,480 2340,400 C2640,320 2780,460 2980,400" fill="none" stroke="#d4a0b0" strokeWidth="1" strokeOpacity="0.18"/>
+          <path d="M-100,560 C200,480 480,640 750,540 C1020,440 1200,600 1540,520 C1840,440 2040,600 2340,520 C2640,440 2780,580 2980,520" fill="none" stroke="#8b8fcc" strokeWidth="0.8" strokeOpacity="0.17"/>
+          <path d="M-100,680 C300,600 550,760 850,660 C1150,560 1300,720 1540,640 C1840,560 2040,720 2340,640 C2640,560 2780,700 2980,640" fill="none" stroke="#5ba89a" strokeWidth="1" strokeOpacity="0.15"/>
+          <path d="M-100,800 C250,720 480,880 780,780 C1080,680 1280,840 1540,760 C1840,680 2040,840 2340,760 C2640,680 2780,820 2980,760" fill="none" stroke="#c9a96e" strokeWidth="0.7" strokeOpacity="0.12"/>
+        </svg>
+      </div>
+      
+      {/* Top border line */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-600/40 to-transparent" />
+    </div>
+  );
+}
+
 export default function HeroSection() {
-  const [particles, setParticles] = useState([]);
+  const [, setParticles] = useState([]);
 
   useEffect(() => {
     const colors = [
@@ -156,269 +179,47 @@ export default function HeroSection() {
         rel="stylesheet"
       />
 
-      <style>{`
-        /* ── Gradient headline ── */
-        .hero-grad-text {
-          background: linear-gradient(135deg, #5b5ef4 0%, #8b5cf6 45%, #06b6d4 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-        }
+      <div className="min-h-screen mt-16 md:mt-10 relative overflow-hidden font-['Inter']">
+        
+        <WavyBg />
 
-        /* ── Dashboard card stacked shadow ── */
-        .dashboard-card::before {
-          content: '';
-          position: absolute; top: 12px; right: -12px;
-          width: 100%; height: 100%;
-          border-radius: 22px;
-          background: linear-gradient(135deg, rgba(99,102,241,0.12), rgba(139,92,246,0.07));
-          z-index: -1;
-        }
-        .dashboard-card::after {
-          content: '';
-          position: absolute; top: 22px; right: -22px;
-          width: 100%; height: 100%;
-          border-radius: 22px;
-          background: linear-gradient(135deg, rgba(99,102,241,0.06), rgba(139,92,246,0.03));
-          z-index: -2;
-        }
+        {/* MAIN CONTENT */}
+        <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between px-4 sm:px-8 lg:px-16 gap-8 lg:gap-12 py-8 max-w-[1400px] mx-auto">
 
-        /* ── Blob keyframes ── */
-        @keyframes blobA {
-          0%,100% { transform: translate(0,0) scale(1); }
-          33%      { transform: translate(20px,-15px) scale(1.06); }
-          66%      { transform: translate(-10px,20px) scale(0.96); }
-        }
-        @keyframes blobB {
-          0%,100% { transform: translate(0,0) scale(1.04); }
-          50%      { transform: translate(-25px,15px) scale(1); }
-        }
-
-        /* ── Badge dot pulse ── */
-        @keyframes badgePulse {
-          0%,100% { transform: scale(1); opacity: 1; }
-          50%      { transform: scale(1.5); opacity: 0.55; }
-        }
-
-        /* ── Responsive ── */
-        @media (max-width: 1024px) {
-          .hero-container   { flex-direction: column !important; padding: 2rem !important; gap: 3rem !important; }
-          .hero-left        { max-width: 100% !important; text-align: center !important; }
-          .hero-left p      { margin: 0 auto 2rem auto !important; }
-          .dashboard-card   { width: 90vw !important; max-width: 460px !important; margin: 0 auto !important; }
-          .floating-stat    { display: none !important; }
-          .trust-row        { justify-content: center !important; }
-        }
-        @media (max-width: 640px) {
-          .hero-container  { padding: 1rem !important; }
-          .dashboard-card  { width: 95vw !important; padding: 1.25rem !important; }
-          .stat-box        { padding: 0.6rem !important; }
-          .stat-value      { font-size: 1.1rem !important; }
-          h1               { font-size: 2rem !important; }
-        }
-      `}</style>
-
-      <div
-        className="min-h-screen mt-16 md:mt-10 relative overflow-hidden"
-        style={{ fontFamily: "'Inter', sans-serif" }}
-      >
-
-        {/* ════════════════════════════════════
-            BACKGROUND
-        ════════════════════════════════════ */}
-        <div className="absolute inset-0 overflow-hidden">
-
-          {/* 1 · Light base gradient */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(145deg, #f0f4ff 0%, #e8f0fe 35%, #f5f0ff 65%, #e6f7f5 100%)",
-            }}
-          />
-
-          {/* 2 · Soft colour blobs */}
-          {[
-            { style: { width: 420, height: 340, top: -80, left: -60 },  color: "rgba(99,179,237,0.28)",  anim: "blobA 10s ease-in-out infinite" },
-            { style: { width: 380, height: 320, top: 40,  right: -80 }, color: "rgba(167,139,250,0.22)", anim: "blobB 12s ease-in-out infinite" },
-            { style: { width: 300, height: 280, bottom: -60, left: "30%" }, color: "rgba(52,211,153,0.2)",  anim: "blobA 9s ease-in-out infinite reverse" },
-            { style: { width: 260, height: 240, bottom: 20, right: "10%" }, color: "rgba(251,146,60,0.14)", anim: "blobB 14s ease-in-out infinite reverse" },
-            { style: { width: 200, height: 180, top: "50%", left: "42%" }, color: "rgba(236,72,153,0.10)", anim: "blobA 8s ease-in-out infinite" },
-          ].map((blob, i) => (
-            <div
-              key={i}
-              className="absolute pointer-events-none"
-              style={{
-                ...blob.style,
-                borderRadius: "50%",
-                filter: "blur(70px)",
-                background: `radial-gradient(circle, ${blob.color} 0%, transparent 70%)`,
-                animation: blob.anim,
-              }}
-            />
-          ))}
-
-          {/* 3 · Grid */}
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `
-                linear-gradient(rgba(99,102,241,0.10) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(99,102,241,0.10) 1px, transparent 1px)
-              `,
-              backgroundSize: "40px 40px",
-              WebkitMaskImage:
-                "radial-gradient(ellipse 90% 80% at 50% 50%, black 30%, transparent 80%)",
-              maskImage:
-                "radial-gradient(ellipse 90% 80% at 50% 50%, black 30%, transparent 80%)",
-            }}
-          />
-
-          {/* 4 · Dot matrix */}
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage:
-                "radial-gradient(circle, rgba(99,102,241,0.25) 1.2px, transparent 1.2px)",
-              backgroundSize: "24px 24px",
-              backgroundPosition: "12px 12px",
-              opacity: 0.6,
-              WebkitMaskImage:
-                "radial-gradient(ellipse 100% 70% at 50% 50%, black 20%, transparent 70%)",
-              maskImage:
-                "radial-gradient(ellipse 100% 70% at 50% 50%, black 20%, transparent 70%)",
-            }}
-          />
-
-          {/* 5 · Geometric SVG accents */}
-          <svg
-            className="absolute inset-0 w-full h-full pointer-events-none overflow-visible"
-            viewBox="0 0 1400 900"
-            preserveAspectRatio="xMidYMid slice"
-          >
-            {/* Hexagons — top right */}
-            <g opacity="0.12" stroke="rgba(99,102,241,1)" strokeWidth="1" fill="none">
-              <polygon points="1250,40 1278,24 1306,40 1306,72 1278,88 1250,72" />
-              <polygon points="1306,40 1334,24 1362,40 1362,72 1334,88 1306,72" />
-              <polygon points="1278,88 1306,72 1334,88 1334,120 1306,136 1278,120" />
-              <polygon points="1222,40 1250,24 1278,40 1278,72 1250,88 1222,72" />
-            </g>
-            {/* Hexagons — bottom left */}
-            <g opacity="0.09" stroke="rgba(139,92,246,1)" strokeWidth="0.8" fill="none">
-              <polygon points="40,760 68,744 96,760 96,792 68,808 40,792" />
-              <polygon points="96,760 124,744 152,760 152,792 124,808 96,792" />
-              <polygon points="68,808 96,792 124,808 124,840 96,856 68,840" />
-            </g>
-            {/* Corner arcs */}
-            <path d="M1400,0 A440,440 0 0,1 960,440" stroke="rgba(99,102,241,0.12)" strokeWidth="1" fill="none" />
-            <path d="M1400,0 A600,600 0 0,1 800,600" stroke="rgba(139,92,246,0.07)" strokeWidth="0.8" fill="none" />
-            {/* Diagonal lines */}
-            <line x1="0" y1="100" x2="350" y2="900" stroke="rgba(99,102,241,0.07)" strokeWidth="0.8" />
-            <line x1="60" y1="0"   x2="440" y2="900" stroke="rgba(99,102,241,0.04)" strokeWidth="0.6" />
-            {/* Bottom waves */}
-            <path d="M0,840 Q350,810 700,824 Q1050,838 1400,810" stroke="rgba(99,102,241,0.10)" strokeWidth="0.8" fill="none" />
-            <path d="M0,870 Q350,840 700,854 Q1050,868 1400,840" stroke="rgba(139,92,246,0.06)" strokeWidth="0.8" fill="none" />
-            {/* Cross marks */}
-            <g stroke="rgba(99,102,241,0.18)" strokeWidth="1.2" strokeLinecap="round">
-              <line x1="220" y1="100" x2="232" y2="112" /><line x1="232" y1="100" x2="220" y2="112" />
-              <line x1="500" y1="50"  x2="512" y2="62"  /><line x1="512" y1="50"  x2="500" y2="62"  />
-              <line x1="90"  y1="540" x2="102" y2="552" /><line x1="102" y1="540" x2="90"  y2="552" />
-              <line x1="780" y1="700" x2="792" y2="712" /><line x1="792" y1="700" x2="780" y2="712" />
-              <line x1="330" y1="800" x2="342" y2="812" /><line x1="342" y1="800" x2="330" y2="812" />
-            </g>
-            {/* Dashed circles */}
-            <circle cx="130" cy="220" r="70"  stroke="rgba(99,102,241,0.1)"  strokeWidth="0.8" strokeDasharray="5 5" fill="none" />
-            <circle cx="1280" cy="680" r="52" stroke="rgba(139,92,246,0.09)" strokeWidth="0.8" strokeDasharray="4 4" fill="none" />
-          </svg>
-
-          {/* 6 · Noise texture */}
-          <div
-            className="absolute inset-0 opacity-[0.018]"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-              backgroundSize: "180px",
-            }}
-          />
-        </div>
-
-        {/* ── Floating particles ── */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          {particles.map((p) => (
-            <motion.div
-              key={p.id}
-              className="absolute rounded-full"
-              style={{
-                width: p.size,
-                height: p.size,
-                background: p.color,
-                left: p.left,
-                top: p.top,
-              }}
-              animate={{
-                y: [0, p.yOffset, 0],
-                x: [0, p.xOffset, 0],
-                opacity: [0, 0.8, 0],
-              }}
-              transition={{
-                duration: p.duration,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: p.delay,
-              }}
-            />
-          ))}
-        </div>
-
-        {/* ════════════════════════════════════
-            MAIN CONTENT
-        ════════════════════════════════════ */}
-        <div className="hero-container relative z-10 flex items-center justify-between px-16 gap-12 py-8 max-w-[1400px] mx-auto">
-
-          {/* ── LEFT ── */}
-          <div className="hero-left flex-1 max-w-[520px]">
+          {/* LEFT SECTION */}
+          <div className="flex-1 max-w-full lg:max-w-[520px] text-center lg:text-left">
 
             {/* Badge */}
             <motion.div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6"
-              style={{
-                background: "rgba(99,102,241,0.08)",
-                border: "1px solid rgba(99,102,241,0.2)",
-                backdropFilter: "blur(8px)",
-              }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6 bg-indigo-500/10 border border-indigo-500/20 backdrop-blur-sm"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
             >
-              <motion.div
-                className="w-2 h-2 rounded-full"
-                style={{
-                  background: "#5b5ef4",
-                  boxShadow: "0 0 8px rgba(91,94,244,0.5)",
-                  animation: "badgePulse 1.8s ease-in-out infinite",
-                }}
-              />
-              <span style={{ fontSize: "0.7rem", fontWeight: 600, color: "#5b5ef4", letterSpacing: "0.07em" }}>
+              <div className="w-2 h-2 rounded-full bg-indigo-600 shadow-[0_0_8px_rgba(91,94,244,0.5)] animate-pulse" />
+              <span className="text-xs font-semibold text-indigo-600 tracking-[0.07em]">
                 TRUSTED BY 500+ BRANDS
               </span>
             </motion.div>
 
             {/* Headline */}
             <motion.h1
-              className="text-[clamp(2.2rem,5vw,4.5rem)] font-black leading-[1.08] mb-6 tracking-tighter"
-              style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#1a1a3e" }}
+              className="text-[clamp(2.2rem,5vw,4.5rem)] font-black leading-[1.08] mb-6 tracking-tighter font-['Plus_Jakarta_Sans'] text-slate-900"
               initial="hidden"
               animate="show"
             >
               {["Digital", "Marketing", "Solutions"].map((word, i) => (
-                <span key={word} style={{ display: "block" }}>
+                <span key={word} className="block">
                   <SplitWord word={word} delay={0.3 + i * 0.12} />
                 </span>
               ))}
-              <span className="hero-grad-text inline-block mt-2">That Drive Results</span>
+              <span className="inline-block mt-2 bg-gradient-to-r from-indigo-600 via-purple-600 to-cyan-600 bg-clip-text text-transparent">
+                That Drive Results
+              </span>
             </motion.h1>
 
             <motion.p
-              style={{ fontSize: "0.95rem", lineHeight: 1.75, color: "#4a5568", marginBottom: "2rem", maxWidth: 440 }}
+              className="text-gray-600 text-sm leading-relaxed mb-8 max-w-md mx-auto lg:mx-0"
               variants={fadeUp(0.78)}
               initial="hidden"
               animate="show"
@@ -428,15 +229,10 @@ export default function HeroSection() {
             </motion.p>
 
             {/* CTA Buttons */}
-            <motion.div className="flex flex-wrap gap-4" variants={fadeUp(0.92)} initial="hidden" animate="show">
+            <motion.div className="flex flex-wrap gap-4 justify-center lg:justify-start" variants={fadeUp(0.92)} initial="hidden" animate="show">
               <motion.button
-                className="group relative inline-flex items-center gap-2 text-white font-semibold text-sm px-8 py-3.5 rounded-full overflow-hidden"
-                style={{
-                  background: "linear-gradient(135deg, #5b5ef4, #8b5cf6)",
-                  boxShadow: "0 8px 25px rgba(91,94,244,0.35), 0 2px 6px rgba(91,94,244,0.2)",
-                  letterSpacing: "0.05em",
-                }}
-                whileHover={{ scale: 1.05, boxShadow: "0 14px 35px rgba(91,94,244,0.45)" }}
+                className="group relative inline-flex items-center gap-2 text-white font-semibold text-sm px-8 py-3.5 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 shadow-[0_8px_25px_rgba(91,94,244,0.35),0_2px_6px_rgba(91,94,244,0.2)] tracking-[0.05em] hover:shadow-[0_14px_35px_rgba(91,94,244,0.45)] transition-all duration-300"
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
               >
                 <span className="relative z-10">GET STARTED</span>
@@ -451,16 +247,8 @@ export default function HeroSection() {
               </motion.button>
 
               <motion.button
-                className="inline-flex items-center gap-2 font-semibold text-sm px-8 py-3.5 rounded-full"
-                style={{
-                  background: "rgba(255,255,255,0.7)",
-                  color: "#4a5568",
-                  border: "1px solid rgba(99,102,241,0.2)",
-                  backdropFilter: "blur(10px)",
-                  boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
-                  letterSpacing: "0.05em",
-                }}
-                whileHover={{ scale: 1.05, borderColor: "rgba(99,102,241,0.45)", background: "rgba(255,255,255,0.9)" }}
+                className="inline-flex items-center gap-2 font-semibold text-sm px-8 py-3.5 rounded-full bg-white/70 text-gray-600 border border-indigo-500/20 backdrop-blur-md shadow-sm tracking-[0.05em] hover:bg-white/90 hover:border-indigo-500/45 transition-all duration-300"
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -473,57 +261,47 @@ export default function HeroSection() {
 
             {/* Trust indicators */}
             <motion.div
-              className="trust-row flex items-center gap-6 mt-8 pt-6"
-              style={{ borderTop: "1px solid rgba(99,102,241,0.1)" }}
+              className="flex items-center gap-6 mt-8 pt-6 border-t border-indigo-500/10 justify-center lg:justify-start"
               variants={fadeUp(1.05)}
               initial="hidden"
               animate="show"
             >
               <div className="flex -space-x-2">
-                {avatarColors.map((bg, i) => (
+                {avatarColors.map((gradient, i) => (
                   <div
                     key={i}
                     className="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-white text-xs font-bold"
-                    style={{ background: bg }}
+                    style={{ background: gradient }}
                   >
                     {String.fromCharCode(65 + i)}
                   </div>
                 ))}
               </div>
               <div>
-                <div className="text-sm font-bold" style={{ color: "#1a1a3e" }}>2,500+ Projects</div>
-                <div className="text-xs" style={{ color: "#718096" }}>Successfully Delivered</div>
+                <div className="text-sm font-bold text-slate-900">2,500+ Projects</div>
+                <div className="text-xs text-gray-500">Successfully Delivered</div>
               </div>
             </motion.div>
           </div>
 
-          {/* ── RIGHT Dashboard ── */}
+          {/* RIGHT DASHBOARD */}
           <div className="flex-1 flex items-center justify-center relative min-h-[520px]">
 
             {/* Floating stat cards */}
             {floatingStats.map((stat) => (
               <motion.div
                 key={stat.label}
-                className="floating-stat absolute z-20 flex items-center gap-3"
-                style={{
-                  ...stat.position,
-                  minWidth: 140,
-                  background: "rgba(255,255,255,0.82)",
-                  border: "1px solid rgba(255,255,255,0.95)",
-                  borderRadius: 14,
-                  padding: "10px 14px",
-                  backdropFilter: "blur(16px)",
-                  boxShadow: "0 8px 24px rgba(99,102,241,0.12), 0 2px 6px rgba(0,0,0,0.04)",
-                }}
+                className="absolute z-20 flex items-center gap-3 min-w-[140px] bg-white/80 backdrop-blur-lg border border-white/95 rounded-xl p-2.5 shadow-[0_8px_24px_rgba(99,102,241,0.12),0_2px_6px_rgba(0,0,0,0.04)] hover:-translate-y-1 transition-all duration-300 lg:flex"
+                style={stat.position}
                 initial={{ opacity: 0, scale: 0, x: -20 }}
                 animate={{ opacity: 1, scale: 1, x: 0 }}
                 transition={{ delay: stat.delay, type: "spring", stiffness: 200 }}
                 whileHover={{ scale: 1.05, y: -4 }}
               >
-                <span style={{ fontSize: "1.4rem" }}>{stat.icon}</span>
+                <span className="text-[1.4rem]">{stat.icon}</span>
                 <div>
-                  <div style={{ fontSize: "0.6rem", color: "#9ca3af" }}>{stat.label}</div>
-                  <div style={{ fontSize: "0.95rem", fontWeight: 900, color: "#1a1a3e", fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                  <div className="text-[0.6rem] text-gray-400">{stat.label}</div>
+                  <div className="text-[0.95rem] font-black text-slate-900 font-['Plus_Jakarta_Sans']">
                     {stat.value}
                   </div>
                 </div>
@@ -532,28 +310,19 @@ export default function HeroSection() {
 
             {/* Dashboard card */}
             <motion.div
-              className="relative z-10"
+              className="relative z-10 w-full max-w-[420px]"
               style={{ perspective: "1200px" }}
               initial={{ opacity: 0, y: 60, rotateX: 12, rotateY: 8 }}
               animate={{ opacity: 1, y: 0, rotateX: 0, rotateY: 0 }}
               transition={{ ...SPRING, delay: 0.55 }}
             >
               <motion.div
-                style={{ transformStyle: "preserve-3d" }}
+                className="transform-gpu"
                 animate={{ y: [0, -12, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
               >
-                <div
-                  className="dashboard-card w-[420px] rounded-[22px] p-5 relative"
-                  style={{
-                    background: "rgba(255,255,255,0.72)",
-                    border: "1px solid rgba(255,255,255,0.9)",
-                    backdropFilter: "blur(24px)",
-                    boxShadow:
-                      "0 24px 64px rgba(99,102,241,0.12), 0 8px 24px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.95)",
-                    transformStyle: "preserve-3d",
-                  }}
-                >
+                <div className="relative rounded-[22px] p-5 bg-white/70 backdrop-blur-xl border border-white/90 shadow-[0_24px_64px_rgba(99,102,241,0.12),0_8px_24px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.95)]">
+                  
                   {/* Card header */}
                   <motion.div
                     className="flex items-center justify-between mb-5"
@@ -562,25 +331,18 @@ export default function HeroSection() {
                     transition={{ delay: 0.75 }}
                   >
                     <div>
-                      <span className="text-sm font-bold" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#1a1a3e" }}>
+                      <span className="text-sm font-bold font-['Plus_Jakarta_Sans'] text-slate-900">
                         Performance Dashboard
                       </span>
-                      <div className="text-xs mt-0.5" style={{ color: "#9ca3af" }}>Last 30 days</div>
+                      <div className="text-xs mt-0.5 text-gray-400">Last 30 days</div>
                     </div>
                     <motion.div
-                      className="flex items-center gap-1.5 text-[0.6rem] font-bold px-3 py-1 rounded-full"
-                      style={{
-                        background: "rgba(16,185,129,0.1)",
-                        border: "1px solid rgba(16,185,129,0.25)",
-                        color: "#059669",
-                        letterSpacing: "0.05em",
-                      }}
+                      className="flex items-center gap-1.5 text-[0.6rem] font-bold px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-700 tracking-[0.05em]"
                       animate={{ opacity: [1, 0.6, 1] }}
                       transition={{ duration: 2, repeat: Infinity }}
                     >
                       <motion.div
-                        className="w-1.5 h-1.5 rounded-full"
-                        style={{ background: "#10b981" }}
+                        className="w-1.5 h-1.5 rounded-full bg-emerald-500"
                         animate={{ scale: [1, 1.4, 1] }}
                         transition={{ duration: 1.3, repeat: Infinity }}
                       />
@@ -598,21 +360,17 @@ export default function HeroSection() {
                     {stats.map((s, idx) => (
                       <motion.div
                         key={s.label}
-                        className="stat-box rounded-xl p-2.5 cursor-pointer"
-                        style={{
-                          background: "linear-gradient(135deg, rgba(99,102,241,0.06), rgba(139,92,246,0.04))",
-                          border: "1px solid rgba(99,102,241,0.1)",
-                        }}
+                        className="rounded-xl p-2.5 cursor-pointer bg-gradient-to-br from-indigo-500/10 to-purple-500/5 border border-indigo-500/10 hover:-translate-y-0.5 transition-all duration-300"
                         variants={scaleIn(idx * 0.1)}
                         whileHover={{ y: -2 }}
                       >
-                        <div style={{ fontSize: "0.6rem", color: "#9ca3af", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 4 }}>
+                        <div className="text-[0.6rem] text-gray-400 font-semibold uppercase tracking-[0.05em] mb-1">
                           {s.label}
                         </div>
-                        <div className="stat-value text-xl font-black" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#1a1a3e" }}>
+                        <div className="text-xl font-black font-['Plus_Jakarta_Sans'] text-slate-900">
                           {s.value}
                         </div>
-                        <div style={{ fontSize: "0.6rem", fontWeight: 600, marginTop: 2, color: s.up ? "#10b981" : "#f43f5e" }}>
+                        <div className={`text-[0.6rem] font-semibold mt-0.5 ${s.up ? 'text-emerald-500' : 'text-rose-500'}`}>
                           {s.change}
                         </div>
                       </motion.div>
@@ -622,8 +380,8 @@ export default function HeroSection() {
                   {/* Bar chart */}
                   <div className="mb-4">
                     <div className="flex justify-between text-[0.7rem] mb-2">
-                      <span style={{ color: "#9ca3af", fontWeight: 500 }}>Weekly Traffic</span>
-                      <span style={{ color: "#10b981", fontWeight: 700 }}>+23% ▲</span>
+                      <span className="text-gray-400 font-medium">Weekly Traffic</span>
+                      <span className="text-emerald-500 font-bold">+23% ▲</span>
                     </div>
                     <div className="flex items-end gap-1.5 h-[70px]">
                       {bars.map((b, i) => (
@@ -633,15 +391,11 @@ export default function HeroSection() {
                   </div>
 
                   {/* Donut + legend */}
-                  <div
-                    className="flex items-center gap-4 pt-4 mt-1"
-                    style={{ borderTop: "1px solid rgba(99,102,241,0.08)" }}
-                  >
+                  <div className="flex items-center gap-4 pt-4 mt-1 border-t border-indigo-500/8">
                     <div className="relative w-24 h-24 flex-shrink-0">
                       <svg
                         viewBox="0 0 36 36"
-                        className="w-24 h-24"
-                        style={{ transform: "rotate(-90deg)" }}
+                        className="w-24 h-24 -rotate-90"
                       >
                         <circle cx="18" cy="18" r="14" fill="none" stroke="rgba(99,102,241,0.1)" strokeWidth="4" />
                         <DonutArc stroke="#5b5ef4" dash={45} offset={0}   delay={1.35} />
@@ -654,8 +408,8 @@ export default function HeroSection() {
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ ...SPRING, delay: 1.9 }}
                       >
-                        <div className="text-2xl font-black" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#1a1a3e" }}>72%</div>
-                        <div style={{ fontSize: "0.6rem", color: "#9ca3af" }}>Engagement</div>
+                        <div className="text-2xl font-black font-['Plus_Jakarta_Sans'] text-slate-900">72%</div>
+                        <div className="text-[0.6rem] text-gray-400">Engagement</div>
                       </motion.div>
                     </div>
 
@@ -668,15 +422,15 @@ export default function HeroSection() {
                       {legend.map((l) => (
                         <motion.div
                           key={l.label}
-                          className="flex items-center justify-between group cursor-pointer"
+                          className="flex items-center justify-between group cursor-pointer hover:translate-x-1 transition-all duration-300"
                           variants={fadeUp(0, 8)}
                           whileHover={{ x: 4 }}
                         >
                           <div className="flex items-center gap-2">
                             <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: l.color }} />
-                            <span style={{ fontSize: "0.7rem", color: "#718096" }}>{l.label}</span>
+                            <span className="text-[0.7rem] text-gray-500">{l.label}</span>
                           </div>
-                          <span style={{ fontSize: "0.7rem", fontWeight: 700, color: "#374151" }}>{l.pct}</span>
+                          <span className="text-[0.7rem] font-bold text-gray-700">{l.pct}</span>
                         </motion.div>
                       ))}
                     </motion.div>
@@ -684,16 +438,15 @@ export default function HeroSection() {
 
                   {/* Trend */}
                   <motion.div
-                    className="flex items-center justify-between mt-4 pt-3"
-                    style={{ borderTop: "1px solid rgba(99,102,241,0.08)" }}
+                    className="flex items-center justify-between mt-4 pt-3 border-t border-indigo-500/8"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 2.0 }}
                   >
-                    <span style={{ fontSize: "0.7rem", color: "#9ca3af" }}>vs. previous period</span>
+                    <span className="text-[0.7rem] text-gray-400">vs. previous period</span>
                     <div className="flex items-center gap-1">
-                      <span style={{ fontSize: "0.7rem", fontWeight: 700, color: "#10b981" }}>↑ 15.3%</span>
-                      <svg className="w-3 h-3" style={{ color: "#10b981" }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <span className="text-[0.7rem] font-bold text-emerald-500">↑ 15.3%</span>
+                      <svg className="w-3 h-3 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                       </svg>
                     </div>

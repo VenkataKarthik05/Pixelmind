@@ -207,6 +207,22 @@ const Contact = () => {
     animation: "pulseSlow 4s ease-in-out infinite"
   };
 
+  // Handler for opening email client
+  const handleEmailClick = (email) => {
+    window.location.href = `mailto:${email}`;
+  };
+
+ // Handler for opening location in Google Maps
+const handleLocationClick = () => {
+  const address = "PIXELMINDSOLUTIONS PVT.LTD, KPHB, Hyderabad, Telangana, India";
+  window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`, '_blank');
+};
+
+  // Handler for phone call
+  const handlePhoneClick = (phone) => {
+    window.location.href = `tel:${phone}`;
+  };
+
   return (
     <div className="min-h-screen font-serif pt-[100px] relative overflow-hidden">
       {/* Animated Background Elements */}
@@ -303,14 +319,16 @@ const Contact = () => {
               {/* Animated Contact Items */}
               <div className="mb-8 space-y-6">
                 {[
-                  { icon: "location", title: "Visit Us", text: "KPHB, Hyderabad, Telangana, India", delay: 0 },
-                  { icon: "phone", title: "Call Us", text: "+91 98765 43210", delay: 100 },
-                  { icon: "email", title: "Email Us", text: "hello@pixelmindsolutions.com", delay: 200 },
-                  { icon: "hours", title: "Business Hours", text: "Mon - Fri: 9:00 AM - 7:00 PM\nSat: 10:00 AM - 4:00 PM", delay: 300 }
+                  { icon: "location", title: "Visit Us", text: "KPHB, Hyderabad, Telangana, India", delay: 0, onClick: handleLocationClick, isClickable: true },
+                  { icon: "phone", title: "Call Us", text: "+91 98765 43210", delay: 100, onClick: () => handlePhoneClick("+919876543210"), isClickable: true },
+                  { icon: "email", title: "Email Us", text: "info@pixelmindsolutions.com", delay: 200, onClick: () => handleEmailClick("info@pixelmindsolutions.com"), isClickable: true },
+                  { icon: "hours", title: "Business Hours", text: "Mon - Fri: 9:00 AM - 7:00 PM\nSat: 10:00 AM - 4:00 PM", delay: 300, isClickable: false }
                 ].map((item, idx) => (
                   <div
                     key={idx}
-                    className={`flex items-center gap-4 group transition-all duration-500 hover:translate-x-2 animate-slide-in-right`}
+                    onClick={item.isClickable ? item.onClick : undefined}
+                    className={`flex items-center gap-4 group transition-all duration-500 hover:translate-x-2 animate-slide-in-right ${item.isClickable ? 'cursor-pointer' : 'cursor-default'
+                      }`}
                     style={{ animationDelay: `${item.delay}ms`, opacity: 0, animationFillMode: "forwards" }}
                   >
                     <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#c9a96e20] to-[#a0784e20] flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
@@ -334,6 +352,7 @@ const Contact = () => {
                       {item.icon === "hours" && (
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" strokeWidth="1.8">
                           <circle cx="12" cy="12" r="10" />
+                          <polyline points="12 6 12 12 16 14" />
                           <line x1="2" y1="12" x2="22" y2="12" />
                           <path d="M12 2a15 15 0 0 0 0 20 15 15 0 0 0 0-20z" />
                         </svg>
@@ -341,7 +360,9 @@ const Contact = () => {
                     </div>
                     <div>
                       <h3 className="text-base text-[#2a1e12] mb-1 font-semibold">{item.title}</h3>
-                      <p className="text-[#7a6652] text-sm whitespace-pre-line">{item.text}</p>
+                      <p className="text-[#7a6652] text-sm whitespace-pre-line group-hover:text-[#c9a96e] transition-colors duration-300">
+                        {item.text}
+                      </p>
                     </div>
                   </div>
                 ))}

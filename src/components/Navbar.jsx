@@ -246,7 +246,7 @@ export default function Navbar() {
 
           <button
             onClick={() => {
-              navigate("/about");
+              navigate("/about", "about");
               setActive("about");
               setMenuOpen(false);
             }}
