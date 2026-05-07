@@ -4,7 +4,7 @@ import Services from "./components/Services";
 import Hero from "./Sections/Hero";
 import Results from "./components/Results";
 import Footer from "./components/Footer";
-import Aboutus from "./Pages/AboutUs";
+import Aboutus from "./Pages/Aboutus";
 import WhyChooseus from "./components/WhyChooseus";
 import SplashCurtain from "./components/loader";
 import WhatsAppButton from "./components/Whatsapp"; 
