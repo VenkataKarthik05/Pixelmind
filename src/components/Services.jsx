@@ -3,16 +3,16 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Search,
   Target,
-  Share2,
-  Magnet,
   BarChart3,
-  Globe,
   CheckCircle,
   ArrowRight,
   TrendingUp,
   Zap,
   Users,
   Clock,
+  Smartphone,
+  Megaphone,
+
 } from "lucide-react";
 
 const services = [
@@ -21,9 +21,9 @@ const services = [
     icon: Search,
     color: "#00b8a9",
     gradient: "from-teal-500 to-cyan-500",
-    title: "Search Engine Optimization",
-    description: "Rank higher on Google with data-driven SEO strategies that deliver sustainable organic growth.",
-    features: ["Technical SEO Audit", "Keyword Research & Strategy", "Quality Link Building", "Content Optimization"],
+    title: "SEO Services Company",
+    description: "Rank higher on Google & get organic traffic that converts.",
+    features: ["Technical SEO Audit", "Keyword Research & Strategy", "Quality Link Building", "Content Optimization", "Local SEO"],
     metric: "+312% traffic",
     metricLabel: "Avg. Traffic Growth",
     stats: [
@@ -32,48 +32,48 @@ const services = [
     ],
   },
   {
-    id: "ppc",
-    icon: Target,
+    id: "mobile-app",
+    icon: Smartphone,
     color: "#f97316",
     gradient: "from-orange-500 to-red-500",
-    title: "PPC Advertising",
-    description: "Maximize ROI with high-performing ad campaigns across Google, Meta, and LinkedIn platforms.",
-    features: ["Google Ads Management", "Meta Advertising", "Retargeting Campaigns", "Shopping Ads"],
+    title: "Mobile App Development Company",
+    description: "Scalable Android & iOS apps tailored to your business needs.",
+    features: ["Native iOS & Android", "Cross-Platform Solutions", "UI/UX Design", "App Store Optimization", "Ongoing Maintenance"],
+    metric: "4.9★ rating",
+    metricLabel: "Client Satisfaction",
+    stats: [
+      { label: "Faster Launch", value: "-40%" },
+      { label: "User Retention", value: "+68%" },
+    ],
+  },
+  {
+    id: "digital-marketing",
+    icon: Megaphone,
+    color: "#f43f8e",
+    gradient: "from-pink-500 to-rose-500",
+    title: "Digital Marketing Services",
+    description: "Complete marketing solutions including ads, content & strategy.",
+    features: ["Content Strategy", "Email Marketing", "Influencer Partnerships", "Marketing Automation", "Brand Strategy"],
+    metric: "3.5x ROI",
+    metricLabel: "Average Return",
+    stats: [
+      { label: "Lead Growth", value: "+187%" },
+      { label: "Brand Awareness", value: "2.4x" },
+    ],
+  },
+  {
+    id: "performance-marketing",
+    icon: Target,
+    color: "#22c55e",
+    gradient: "from-green-500 to-emerald-500",
+    title: "Performance Marketing",
+    description: "ROI-focused Google Ads & Meta Ads campaigns.",
+    features: ["Google Ads Management", "Meta Advertising", "Retargeting Campaigns", "Shopping Ads", "Conversion Tracking"],
     metric: "4.8x ROAS",
-    metricLabel: "Avg. Return on Ad Spend",
+    metricLabel: "Return on Ad Spend",
     stats: [
       { label: "Conversion Rate", value: "+42%" },
       { label: "Cost Per Click", value: "-31%" },
-    ],
-  },
-  {
-    id: "social",
-    icon: Share2,
-    color: "#f43f8e",
-    gradient: "from-pink-500 to-rose-500",
-    title: "Social Media Marketing",
-    description: "Grow your audience and engagement with creative content and data-driven social strategies.",
-    features: ["Content Strategy", "Reels & Stories", "Influencer Partnerships", "Community Management"],
-    metric: "8x engagement",
-    metricLabel: "Avg. Engagement Rate",
-    stats: [
-      { label: "Follower Growth", value: "+215%" },
-      { label: "Reach Increase", value: "3.2x" },
-    ],
-  },
-  {
-    id: "leads",
-    icon: Magnet,
-    color: "#22c55e",
-    gradient: "from-green-500 to-emerald-500",
-    title: "Lead Generation",
-    description: "Generate high-quality leads consistently with automated funnels and smart targeting.",
-    features: ["Conversion Funnels", "Email Automation", "CRM Integration", "Landing Page Optimization"],
-    metric: "-67% CPL",
-    metricLabel: "Cost Per Lead Reduction",
-    stats: [
-      { label: "Lead Quality", value: "+89%" },
-      { label: "Conversion Rate", value: "+124%" },
     ],
   },
   {
@@ -82,28 +82,13 @@ const services = [
     color: "#3b82f6",
     gradient: "from-blue-500 to-indigo-500",
     title: "Analytics & Insights",
-    description: "Track and optimize your marketing performance with comprehensive analytics and reporting.",
-    features: ["GA4 Setup & Audit", "Custom Dashboards", "Attribution Modeling", "ROI Tracking"],
+    description: "Data-driven decisions with comprehensive marketing analytics.",
+    features: ["GA4 Setup & Audit", "Custom Dashboards", "Attribution Modeling", "ROI Tracking", "Heatmap Analysis"],
     metric: "Full clarity",
     metricLabel: "Data Transparency",
     stats: [
       { label: "Decision Speed", value: "+73%" },
       { label: "ROI Accuracy", value: "99.9%" },
-    ],
-  },
-  {
-    id: "web",
-    icon: Globe,
-    color: "#a855f7",
-    gradient: "from-purple-500 to-violet-500",
-    title: "Conversion Optimization",
-    description: "Convert visitors into paying customers with data-backed CRO strategies and UX improvements.",
-    features: ["A/B Testing", "UX/UI Optimization", "Heatmap Analysis", "Checkout Optimization"],
-    metric: "+43%",
-    metricLabel: "Conversion Rate Lift",
-    stats: [
-      { label: "Bounce Rate", value: "-38%" },
-      { label: "Avg. Session", value: "+2.4min" },
     ],
   },
 ];
@@ -219,7 +204,7 @@ export default function Services() {
           </h2>
           
           <p className="text-gray-500 max-w-2xl mx-auto text-lg">
-            We are a full-service digital marketing agency helping brands scale with data-driven strategies.
+            We are a full-service digital agency helping brands scale with data-driven strategies.
           </p>
 
           {/* Decorative Line */}
