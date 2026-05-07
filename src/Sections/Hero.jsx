@@ -1,17 +1,14 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
-/* ── shared easing ── */
 const SPRING = { type: "spring", stiffness: 80, damping: 18 };
 const EASE   = [0.16, 1, 0.3, 1];
 
-/* ── stagger container ── */
 const staggerParent = (stagger = 0.08, delayChildren = 0) => ({
   hidden: {},
   show: { transition: { staggerChildren: stagger, delayChildren } },
 });
 
-/* ── reusable variants ── */
 const fadeUp = (delay = 0, y = 28) => ({
   hidden: { opacity: 0, y },
   show:   { opacity: 1, y: 0, transition: { duration: 0.65, ease: EASE, delay } },
@@ -22,7 +19,6 @@ const scaleIn = (delay = 0) => ({
   show:   { opacity: 1, scale: 1, transition: { ...SPRING, delay } },
 });
 
-/* ── word-split headline ── */
 function SplitWord({ word, delay }) {
   return (
     <span className="inline-block overflow-hidden leading-[1.05]">
@@ -39,7 +35,6 @@ function SplitWord({ word, delay }) {
   );
 }
 
-/* ── animated bar ── */
 function Bar({ h, active, lbl, delay }) {
   return (
     <div className="flex-1 flex flex-col items-center gap-1">
@@ -63,7 +58,6 @@ function Bar({ h, active, lbl, delay }) {
   );
 }
 
-/* ── animated donut segment ── */
 function DonutArc({ stroke, dash, offset, delay }) {
   const total = 88;
   return (
@@ -81,32 +75,52 @@ function DonutArc({ stroke, dash, offset, delay }) {
   );
 }
 
-/* ── Wavy Background Component ── */
-function WavyBg() {
+/* ── Hero Background with Unsplash image + layered overlays ── */
+function HeroBg() {
   return (
-    <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
-      {/* Base gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-stone-50 to-indigo-50" />
-      
-      {/* Animated blobs */}
-      <div className="absolute -top-[10%] -right-[5%] w-[55vw] h-[55vw] rounded-full bg-gradient-radial from-amber-200/55 via-amber-200/30 to-transparent animate-blob" />
-      <div className="absolute bottom-[5%] -left-[8%] w-[50vw] h-[50vw] rounded-full bg-gradient-radial from-indigo-200/40 via-indigo-200/20 to-transparent animate-blob2" />
-      <div className="absolute top-[40%] left-[30%] w-[40vw] h-[40vw] rounded-full bg-gradient-radial from-emerald-200/35 via-emerald-200/15 to-transparent animate-blob" />
-      
-      {/* SVG Waves */}
-      <div className="absolute top-0 left-0 w-[200%] h-screen overflow-hidden">
+    <div className="absolute inset-0 z-0 overflow-hidden">
+      {/* Full-section background image */}
+      <img
+        src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1800&q=85"
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 w-full h-full object-cover object-center scale-105"
+        style={{ filter: "saturate(1.15) brightness(0.82)" }}
+      />
+
+      {/* Primary dark overlay — creates readable backdrop */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-950/80 via-indigo-950/70 to-slate-900/75" />
+
+      {/* Colored glow overlays for the branded feel */}
+      <div className="absolute -top-[10%] -right-[5%] w-[55vw] h-[55vw] rounded-full bg-indigo-600/20 blur-[120px]" />
+      <div className="absolute bottom-[5%] -left-[8%] w-[50vw] h-[50vw] rounded-full bg-purple-700/15 blur-[100px]" />
+      <div className="absolute top-[40%] left-[30%] w-[40vw] h-[40vw] rounded-full bg-cyan-600/10 blur-[90px]" />
+
+      {/* Subtle SVG line waves on top of image */}
+      <div className="absolute top-0 left-0 w-[200%] h-screen overflow-hidden opacity-40">
         <svg className="w-full h-full" viewBox="0 0 2880 900" preserveAspectRatio="none">
-          <path d="M-100,200 C200,120 400,280 700,200 C1000,120 1200,260 1540,180 C1840,100 2040,260 2340,180 C2640,100 2740,220 2980,180" fill="none" stroke="#c9a96e" strokeWidth="1" strokeOpacity="0.22"/>
-          <path d="M-100,310 C150,220 350,390 650,290 C950,190 1150,370 1540,280 C1840,190 2040,370 2340,280 C2640,190 2780,340 2980,280" fill="none" stroke="#c9a96e" strokeWidth="0.7" strokeOpacity="0.15"/>
-          <path d="M-100,440 C250,360 500,520 800,420 C1100,320 1280,480 1540,400 C1840,320 2040,480 2340,400 C2640,320 2780,460 2980,400" fill="none" stroke="#d4a0b0" strokeWidth="1" strokeOpacity="0.18"/>
-          <path d="M-100,560 C200,480 480,640 750,540 C1020,440 1200,600 1540,520 C1840,440 2040,600 2340,520 C2640,440 2780,580 2980,520" fill="none" stroke="#8b8fcc" strokeWidth="0.8" strokeOpacity="0.17"/>
-          <path d="M-100,680 C300,600 550,760 850,660 C1150,560 1300,720 1540,640 C1840,560 2040,720 2340,640 C2640,560 2780,700 2980,640" fill="none" stroke="#5ba89a" strokeWidth="1" strokeOpacity="0.15"/>
-          <path d="M-100,800 C250,720 480,880 780,780 C1080,680 1280,840 1540,760 C1840,680 2040,840 2340,760 C2640,680 2780,820 2980,760" fill="none" stroke="#c9a96e" strokeWidth="0.7" strokeOpacity="0.12"/>
+          <path d="M-100,200 C200,120 400,280 700,200 C1000,120 1200,260 1540,180 C1840,100 2040,260 2340,180 C2640,100 2740,220 2980,180" fill="none" stroke="#c9a96e" strokeWidth="1" strokeOpacity="0.35"/>
+          <path d="M-100,310 C150,220 350,390 650,290 C950,190 1150,370 1540,280 C1840,190 2040,370 2340,280 C2640,190 2780,340 2980,280" fill="none" stroke="#c9a96e" strokeWidth="0.7" strokeOpacity="0.25"/>
+          <path d="M-100,440 C250,360 500,520 800,420 C1100,320 1280,480 1540,400 C1840,320 2040,480 2340,400 C2640,320 2780,460 2980,400" fill="none" stroke="#d4a0b0" strokeWidth="1" strokeOpacity="0.28"/>
+          <path d="M-100,560 C200,480 480,640 750,540 C1020,440 1200,600 1540,520 C1840,440 2040,600 2340,520 C2640,440 2780,580 2980,520" fill="none" stroke="#8b8fcc" strokeWidth="0.8" strokeOpacity="0.27"/>
+          <path d="M-100,680 C300,600 550,760 850,660 C1150,560 1300,720 1540,640 C1840,560 2040,720 2340,640 C2640,560 2780,700 2980,640" fill="none" stroke="#5ba89a" strokeWidth="1" strokeOpacity="0.22"/>
         </svg>
       </div>
-      
-      {/* Top border line */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-600/40 to-transparent" />
+
+      {/* Dot-grid noise texture overlay for depth */}
+      <div
+        className="absolute inset-0 opacity-[0.04]"
+        style={{
+          backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 1px)",
+          backgroundSize: "32px 32px",
+        }}
+      />
+
+      {/* Top border shimmer line */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-indigo-400/60 to-transparent" />
+
+      {/* Bottom fade to white/next section */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white via-white/60 to-transparent" />
     </div>
   );
 }
@@ -180,8 +194,9 @@ export default function HeroSection() {
       />
 
       <div className="min-h-screen mt-16 md:mt-10 relative overflow-hidden font-['Inter']">
-        
-        <WavyBg />
+
+        {/* ── Full-section background image with overlays ── */}
+        <HeroBg />
 
         {/* MAIN CONTENT */}
         <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between px-4 sm:px-8 lg:px-16 gap-8 lg:gap-12 py-8 max-w-[1400px] mx-auto">
@@ -191,20 +206,20 @@ export default function HeroSection() {
 
             {/* Badge */}
             <motion.div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6 bg-indigo-500/10 border border-indigo-500/20 backdrop-blur-sm"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6 bg-indigo-500/20 border border-indigo-400/30 backdrop-blur-sm"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
             >
-              <div className="w-2 h-2 rounded-full bg-indigo-600 shadow-[0_0_8px_rgba(91,94,244,0.5)] animate-pulse" />
-              <span className="text-xs font-semibold text-indigo-600 tracking-[0.07em]">
+              <div className="w-2 h-2 rounded-full bg-indigo-400 shadow-[0_0_8px_rgba(129,140,248,0.8)] animate-pulse" />
+              <span className="text-xs font-semibold text-indigo-300 tracking-[0.07em]">
                 TRUSTED BY 500+ BRANDS
               </span>
             </motion.div>
 
-            {/* Headline */}
+            {/* Headline — white text on dark bg */}
             <motion.h1
-              className="text-[clamp(2.2rem,5vw,4.5rem)] font-black leading-[1.08] mb-6 tracking-tighter font-['Plus_Jakarta_Sans'] text-slate-900"
+              className="text-[clamp(2.2rem,5vw,4.5rem)] font-black leading-[1.08] mb-6 tracking-tighter font-['Plus_Jakarta_Sans'] text-white"
               initial="hidden"
               animate="show"
             >
@@ -213,13 +228,13 @@ export default function HeroSection() {
                   <SplitWord word={word} delay={0.3 + i * 0.12} />
                 </span>
               ))}
-              <span className="inline-block mt-2 bg-gradient-to-r from-indigo-600 via-purple-600 to-cyan-600 bg-clip-text text-transparent">
+              <span className="inline-block mt-2 bg-gradient-to-r from-indigo-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
                 That Drive Results
               </span>
             </motion.h1>
 
             <motion.p
-              className="text-gray-600 text-sm leading-relaxed mb-8 max-w-md mx-auto lg:mx-0"
+              className="text-slate-300 text-sm leading-relaxed mb-8 max-w-md mx-auto lg:mx-0"
               variants={fadeUp(0.78)}
               initial="hidden"
               animate="show"
@@ -231,7 +246,7 @@ export default function HeroSection() {
             {/* CTA Buttons */}
             <motion.div className="flex flex-wrap gap-4 justify-center lg:justify-start" variants={fadeUp(0.92)} initial="hidden" animate="show">
               <motion.button
-                className="group relative inline-flex items-center gap-2 text-white font-semibold text-sm px-8 py-3.5 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 shadow-[0_8px_25px_rgba(91,94,244,0.35),0_2px_6px_rgba(91,94,244,0.2)] tracking-[0.05em] hover:shadow-[0_14px_35px_rgba(91,94,244,0.45)] transition-all duration-300"
+                className="group relative inline-flex items-center gap-2 text-white font-semibold text-sm px-8 py-3.5 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 shadow-[0_8px_25px_rgba(91,94,244,0.5),0_2px_6px_rgba(91,94,244,0.3)] tracking-[0.05em] hover:shadow-[0_14px_35px_rgba(91,94,244,0.6)] transition-all duration-300"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
               >
@@ -247,7 +262,7 @@ export default function HeroSection() {
               </motion.button>
 
               <motion.button
-                className="inline-flex items-center gap-2 font-semibold text-sm px-8 py-3.5 rounded-full bg-white/70 text-gray-600 border border-indigo-500/20 backdrop-blur-md shadow-sm tracking-[0.05em] hover:bg-white/90 hover:border-indigo-500/45 transition-all duration-300"
+                className="inline-flex items-center gap-2 font-semibold text-sm px-8 py-3.5 rounded-full bg-white/10 text-white border border-white/25 backdrop-blur-md shadow-sm tracking-[0.05em] hover:bg-white/20 hover:border-white/40 transition-all duration-300"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
               >
@@ -261,7 +276,7 @@ export default function HeroSection() {
 
             {/* Trust indicators */}
             <motion.div
-              className="flex items-center gap-6 mt-8 pt-6 border-t border-indigo-500/10 justify-center lg:justify-start"
+              className="flex items-center gap-6 mt-8 pt-6 border-t border-white/10 justify-center lg:justify-start"
               variants={fadeUp(1.05)}
               initial="hidden"
               animate="show"
@@ -270,7 +285,7 @@ export default function HeroSection() {
                 {avatarColors.map((gradient, i) => (
                   <div
                     key={i}
-                    className="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-white text-xs font-bold"
+                    className="w-8 h-8 rounded-full border-2 border-white/30 flex items-center justify-center text-white text-xs font-bold"
                     style={{ background: gradient }}
                   >
                     {String.fromCharCode(65 + i)}
@@ -278,8 +293,8 @@ export default function HeroSection() {
                 ))}
               </div>
               <div>
-                <div className="text-sm font-bold text-slate-900">2,500+ Projects</div>
-                <div className="text-xs text-gray-500">Successfully Delivered</div>
+                <div className="text-sm font-bold text-white">2,500+ Projects</div>
+                <div className="text-xs text-slate-400">Successfully Delivered</div>
               </div>
             </motion.div>
           </div>
@@ -291,7 +306,7 @@ export default function HeroSection() {
             {floatingStats.map((stat) => (
               <motion.div
                 key={stat.label}
-                className="absolute z-20 flex items-center gap-3 min-w-[140px] bg-white/80 backdrop-blur-lg border border-white/95 rounded-xl p-2.5 shadow-[0_8px_24px_rgba(99,102,241,0.12),0_2px_6px_rgba(0,0,0,0.04)] hover:-translate-y-1 transition-all duration-300 lg:flex"
+                className="absolute z-20 flex items-center gap-3 min-w-[140px] bg-white/90 backdrop-blur-lg border border-white/95 rounded-xl p-2.5 shadow-[0_8px_24px_rgba(0,0,0,0.25),0_2px_6px_rgba(0,0,0,0.1)] hover:-translate-y-1 transition-all duration-300 lg:flex"
                 style={stat.position}
                 initial={{ opacity: 0, scale: 0, x: -20 }}
                 animate={{ opacity: 1, scale: 1, x: 0 }}
@@ -321,8 +336,8 @@ export default function HeroSection() {
                 animate={{ y: [0, -12, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
               >
-                <div className="relative rounded-[22px] p-5 bg-white/70 backdrop-blur-xl border border-white/90 shadow-[0_24px_64px_rgba(99,102,241,0.12),0_8px_24px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.95)]">
-                  
+                <div className="relative rounded-[22px] p-5 bg-white/85 backdrop-blur-2xl border border-white/90 shadow-[0_32px_80px_rgba(0,0,0,0.35),0_8px_24px_rgba(99,102,241,0.2),inset_0_1px_0_rgba(255,255,255,0.95)]">
+
                   {/* Card header */}
                   <motion.div
                     className="flex items-center justify-between mb-5"
@@ -393,10 +408,7 @@ export default function HeroSection() {
                   {/* Donut + legend */}
                   <div className="flex items-center gap-4 pt-4 mt-1 border-t border-indigo-500/8">
                     <div className="relative w-24 h-24 flex-shrink-0">
-                      <svg
-                        viewBox="0 0 36 36"
-                        className="w-24 h-24 -rotate-90"
-                      >
+                      <svg viewBox="0 0 36 36" className="w-24 h-24 -rotate-90">
                         <circle cx="18" cy="18" r="14" fill="none" stroke="rgba(99,102,241,0.1)" strokeWidth="4" />
                         <DonutArc stroke="#5b5ef4" dash={45} offset={0}   delay={1.35} />
                         <DonutArc stroke="#8b5cf6" dash={22} offset={-45} delay={1.55} />

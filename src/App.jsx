@@ -15,7 +15,7 @@ import Contact from "./Pages/Contact";
 
 function App() {
   return (
-    <SplashCurtain duration={2600}>
+    <SplashCurtain duration={1400}>
       <Navbar />
       <Routes>
         <Route

@@ -12,7 +12,6 @@ import {
   Clock,
   Smartphone,
   Megaphone,
-
 } from "lucide-react";
 
 const services = [
@@ -26,6 +25,7 @@ const services = [
     features: ["Technical SEO Audit", "Keyword Research & Strategy", "Quality Link Building", "Content Optimization", "Local SEO"],
     metric: "+312% traffic",
     metricLabel: "Avg. Traffic Growth",
+    bgImage: "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=600&q=80",
     stats: [
       { label: "SERP Features", value: "87%" },
       { label: "Click-Through Rate", value: "+156%" },
@@ -41,6 +41,7 @@ const services = [
     features: ["Native iOS & Android", "Cross-Platform Solutions", "UI/UX Design", "App Store Optimization", "Ongoing Maintenance"],
     metric: "4.9★ rating",
     metricLabel: "Client Satisfaction",
+    bgImage: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&q=80",
     stats: [
       { label: "Faster Launch", value: "-40%" },
       { label: "User Retention", value: "+68%" },
@@ -56,6 +57,7 @@ const services = [
     features: ["Content Strategy", "Email Marketing", "Influencer Partnerships", "Marketing Automation", "Brand Strategy"],
     metric: "3.5x ROI",
     metricLabel: "Average Return",
+    bgImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80",
     stats: [
       { label: "Lead Growth", value: "+187%" },
       { label: "Brand Awareness", value: "2.4x" },
@@ -71,6 +73,7 @@ const services = [
     features: ["Google Ads Management", "Meta Advertising", "Retargeting Campaigns", "Shopping Ads", "Conversion Tracking"],
     metric: "4.8x ROAS",
     metricLabel: "Return on Ad Spend",
+    bgImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80",
     stats: [
       { label: "Conversion Rate", value: "+42%" },
       { label: "Cost Per Click", value: "-31%" },
@@ -86,6 +89,7 @@ const services = [
     features: ["GA4 Setup & Audit", "Custom Dashboards", "Attribution Modeling", "ROI Tracking", "Heatmap Analysis"],
     metric: "Full clarity",
     metricLabel: "Data Transparency",
+    bgImage: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=600&q=80",
     stats: [
       { label: "Decision Speed", value: "+73%" },
       { label: "ROI Accuracy", value: "99.9%" },
@@ -110,14 +114,14 @@ export default function Services() {
 
   const cardVariants = {
     hidden: { opacity: 0, y: 50 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       transition: {
         type: "spring",
         stiffness: 100,
         damping: 15,
-      }
+      },
     },
   };
 
@@ -128,32 +132,18 @@ export default function Services() {
     >
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Gradient Orbs */}
         <div className="absolute top-20 left-10 w-96 h-96 bg-teal-300/10 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-20 right-10 w-80 h-80 bg-orange-300/10 rounded-full blur-3xl animate-pulse delay-1000" />
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-300/5 rounded-full blur-3xl" />
-        
-        {/* Grid Pattern */}
-        <div 
+        <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
             backgroundImage: "radial-gradient(circle at 1px 1px, #00b8a9 1px, transparent 1px)",
             backgroundSize: "40px 40px",
           }}
         />
-
-        {/* Decorative Waves */}
-        <svg
-          className="absolute -top-40 -right-40 w-[700px] opacity-20"
-          viewBox="0 0 600 600"
-          fill="none"
-        >
-          <path
-            d="M0 300 C150 100, 450 100, 600 300 C450 500, 150 500, 0 300"
-            stroke="url(#waveGrad1)"
-            strokeWidth="2"
-            strokeDasharray="8 8"
-          />
+        <svg className="absolute -top-40 -right-40 w-[700px] opacity-20" viewBox="0 0 600 600" fill="none">
+          <path d="M0 300 C150 100, 450 100, 600 300 C450 500, 150 500, 0 300" stroke="url(#waveGrad1)" strokeWidth="2" strokeDasharray="8 8" />
           <defs>
             <linearGradient id="waveGrad1" x1="0" y1="0" x2="1" y2="1">
               <stop stopColor="#00b8a9" />
@@ -161,18 +151,8 @@ export default function Services() {
             </linearGradient>
           </defs>
         </svg>
-
-        <svg
-          className="absolute bottom-[-100px] left-[-200px] w-[800px] opacity-15"
-          viewBox="0 0 800 800"
-          fill="none"
-        >
-          <path
-            d="M0 400 C200 200, 600 200, 800 400 C600 600, 200 600, 0 400"
-            stroke="url(#waveGrad2)"
-            strokeWidth="1.5"
-            strokeDasharray="6 6"
-          />
+        <svg className="absolute bottom-[-100px] left-[-200px] w-[800px] opacity-15" viewBox="0 0 800 800" fill="none">
+          <path d="M0 400 C200 200, 600 200, 800 400 C600 600, 200 600, 0 400" stroke="url(#waveGrad2)" strokeWidth="1.5" strokeDasharray="6 6" />
           <defs>
             <linearGradient id="waveGrad2" x1="0" y1="0" x2="1" y2="1">
               <stop stopColor="#f97316" />
@@ -192,22 +172,17 @@ export default function Services() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full mb-6 border border-teal-200/50 shadow-sm">
             <div className="w-2 h-2 rounded-full bg-teal-500 animate-pulse" />
             <span className="text-xs font-semibold text-teal-600 tracking-wide">WHAT WE OFFER</span>
           </div>
-
           <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4 tracking-tight">
             Our Growth-Focused
             <span className="bg-gradient-to-r from-teal-500 to-cyan-500 bg-clip-text text-transparent"> Services</span>
           </h2>
-          
           <p className="text-gray-500 max-w-2xl mx-auto text-lg">
             We are a full-service digital agency helping brands scale with data-driven strategies.
           </p>
-
-          {/* Decorative Line */}
           <div className="flex justify-center mt-8">
             <div className="w-20 h-1 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full" />
           </div>
@@ -225,145 +200,143 @@ export default function Services() {
             <motion.div
               key={svc.id}
               variants={cardVariants}
-              whileHover={{ 
+              whileHover={{
                 y: -12,
-                transition: { type: "spring", stiffness: 300 }
+                transition: { type: "spring", stiffness: 300 },
               }}
               onClick={() => setActive(active === svc.id ? null : svc.id)}
               onMouseEnter={() => setHoveredCard(svc.id)}
               onMouseLeave={() => setHoveredCard(null)}
-              className="group relative bg-white rounded-2xl p-6 cursor-pointer transition-all duration-300 hover:shadow-2xl"
+              className="group relative bg-white rounded-2xl cursor-pointer transition-all duration-300 hover:shadow-2xl overflow-hidden"
               style={{
-                boxShadow: hoveredCard === svc.id 
-                  ? `0 20px 40px -12px ${svc.color}40`
-                  : "0 4px 6px -2px rgba(0,0,0,0.05), 0 10px 15px -3px rgba(0,0,0,0.05)",
+                boxShadow:
+                  hoveredCard === svc.id
+                    ? `0 20px 40px -12px ${svc.color}40`
+                    : "0 4px 6px -2px rgba(0,0,0,0.05), 0 10px 15px -3px rgba(0,0,0,0.05)",
               }}
             >
-              {/* Animated Border Gradient */}
-              <div
-                className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                style={{
-                  background: `linear-gradient(135deg, ${svc.color}40, transparent)`,
-                  padding: "1px",
-                  mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-                  WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-                  WebkitMaskComposite: "xor",
-                  maskComposite: "exclude",
-                }}
-              />
-
-              {/* Background Glow on Hover */}
-              <div
-                className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-30 transition-opacity duration-500 pointer-events-none"
-                style={{
-                  background: `radial-gradient(circle at 50% 0%, ${svc.color}30, transparent 70%)`,
-                }}
-              />
-
-              {/* Icon Container */}
-              <motion.div
-                className="w-14 h-14 rounded-xl flex items-center justify-center mb-5 relative overflow-hidden"
-                style={{
-                  background: `linear-gradient(135deg, ${svc.color}15, ${svc.color}08)`,
-                }}
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                transition={{ type: "spring", stiffness: 400 }}
-              >
-                <svc.icon size={26} style={{ color: svc.color }} />
-                
-                {/* Ripple Effect on Hover */}
-                <motion.div
-                  className="absolute inset-0 rounded-xl"
-                  initial={{ scale: 0, opacity: 0 }}
-                  whileHover={{ scale: 2, opacity: 0 }}
-                  transition={{ duration: 0.5 }}
-                  style={{ background: svc.color }}
+              {/* ── Background Image Banner ── */}
+              <div className="relative h-36 w-full overflow-hidden">
+                <img
+                  src={svc.bgImage}
+                  alt={svc.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-              </motion.div>
+                {/* Gradient overlay so content on top stays readable */}
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background: `linear-gradient(to bottom, ${svc.color}55 0%, ${svc.color}99 60%, rgba(255,255,255,1) 100%)`,
+                  }}
+                />
 
-              {/* Title */}
-              <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-teal-600 transition-colors">
-                {svc.title}
-              </h3>
+                {/* Icon pinned to bottom-left of the banner */}
+                <div
+                  className="absolute bottom-3 left-5 w-12 h-12 rounded-xl flex items-center justify-center shadow-lg"
+                  style={{ background: "white" }}
+                >
+                  <svc.icon size={22} style={{ color: svc.color }} />
+                </div>
 
-              {/* Description */}
-              <p className="text-gray-500 text-sm mb-4 leading-relaxed">
-                {svc.description}
-              </p>
-
-              {/* Metric Badge */}
-              <motion.div
-                className="inline-flex items-center gap-2 text-xs font-bold px-3 py-1.5 rounded-full mb-4"
-                style={{
-                  background: `${svc.color}12`,
-                  color: svc.color,
-                }}
-                whileHover={{ scale: 1.05 }}
-              >
-                <TrendingUp size={12} />
-                <span>{svc.metric}</span>
-                <span className="text-gray-400 font-normal">{svc.metricLabel}</span>
-              </motion.div>
-
-              {/* Stats Grid */}
-              <div className="grid grid-cols-2 gap-3 mb-4">
-                {svc.stats.map((stat, idx) => (
-                  <motion.div
-                    key={idx}
-                    className="bg-gray-50 rounded-lg p-2 text-center"
-                    whileHover={{ scale: 1.05, backgroundColor: `${svc.color}08` }}
-                  >
-                    <div className="text-sm font-bold text-gray-900">{stat.value}</div>
-                    <div className="text-xs text-gray-500">{stat.label}</div>
-                  </motion.div>
-                ))}
+                {/* Metric badge pinned to top-right */}
+                <div
+                  className="absolute top-3 right-3 flex items-center gap-1.5 text-xs font-bold px-2.5 py-1 rounded-full shadow"
+                  style={{ background: "white", color: svc.color }}
+                >
+                  <TrendingUp size={11} />
+                  <span>{svc.metric}</span>
+                </div>
               </div>
 
-              {/* Features List - Animated */}
-              <AnimatePresence>
-                {active === svc.id && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="mt-4 pt-4 border-t border-gray-100"
-                  >
-                    <div className="space-y-2">
-                      {svc.features.map((f, idx) => (
-                        <motion.div
-                          key={f}
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: idx * 0.05 }}
-                          className="flex items-center gap-2 text-sm text-gray-600 group/feature"
-                        >
-                          <CheckCircle size={14} style={{ color: svc.color }} className="flex-shrink-0" />
-                          <span className="group-hover/feature:text-gray-900 transition-colors">{f}</span>
-                        </motion.div>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-
-              {/* View Details Link */}
-              <motion.div
-                className="mt-4 flex items-center justify-between"
-                initial={{ opacity: 0.6 }}
-                whileHover={{ opacity: 1 }}
-              >
-                <span className="text-xs font-medium text-gray-400">
-                  {active === svc.id ? "Show less" : "View details"}
-                </span>
-                <ArrowRight 
-                  size={14} 
-                  style={{ color: svc.color }}
-                  className={`transform transition-transform duration-300 ${
-                    active === svc.id ? "rotate-90" : "group-hover:translate-x-1"
-                  }`}
+              {/* ── Card Body ── */}
+              <div className="p-6 pt-4">
+                {/* Animated border glow */}
+                <div
+                  className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                  style={{
+                    background: `linear-gradient(135deg, ${svc.color}40, transparent)`,
+                    padding: "1px",
+                    mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                    WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                    WebkitMaskComposite: "xor",
+                    maskComposite: "exclude",
+                  }}
                 />
-              </motion.div>
+
+                <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-teal-600 transition-colors leading-snug">
+                  {svc.title}
+                </h3>
+
+                <p className="text-gray-500 text-sm mb-4 leading-relaxed">{svc.description}</p>
+
+                {/* Metric label */}
+                <p
+                  className="text-xs font-semibold mb-4"
+                  style={{ color: svc.color }}
+                >
+                  {svc.metricLabel}
+                </p>
+
+                {/* Stats Grid */}
+                <div className="grid grid-cols-2 gap-3 mb-4">
+                  {svc.stats.map((stat, idx) => (
+                    <motion.div
+                      key={idx}
+                      className="bg-gray-50 rounded-lg p-2 text-center"
+                      whileHover={{ scale: 1.05, backgroundColor: `${svc.color}08` }}
+                    >
+                      <div className="text-sm font-bold text-gray-900">{stat.value}</div>
+                      <div className="text-xs text-gray-500">{stat.label}</div>
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* Features List — Animated */}
+                <AnimatePresence>
+                  {active === svc.id && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="mt-4 pt-4 border-t border-gray-100"
+                    >
+                      <div className="space-y-2">
+                        {svc.features.map((f, idx) => (
+                          <motion.div
+                            key={f}
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: idx * 0.05 }}
+                            className="flex items-center gap-2 text-sm text-gray-600 group/feature"
+                          >
+                            <CheckCircle size={14} style={{ color: svc.color }} className="flex-shrink-0" />
+                            <span className="group-hover/feature:text-gray-900 transition-colors">{f}</span>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                {/* View Details Link */}
+                <motion.div
+                  className="mt-4 flex items-center justify-between"
+                  initial={{ opacity: 0.6 }}
+                  whileHover={{ opacity: 1 }}
+                >
+                  <span className="text-xs font-medium text-gray-400">
+                    {active === svc.id ? "Show less" : "View details"}
+                  </span>
+                  <ArrowRight
+                    size={14}
+                    style={{ color: svc.color }}
+                    className={`transform transition-transform duration-300 ${
+                      active === svc.id ? "rotate-90" : "group-hover:translate-x-1"
+                    }`}
+                  />
+                </motion.div>
+              </div>
             </motion.div>
           ))}
         </motion.div>

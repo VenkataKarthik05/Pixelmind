@@ -58,15 +58,108 @@ const cases = [
     },
 ];
 
+/* ── Fresh Light Geometric Background ── */
+function ResultsBg() {
+    return (
+        <div className="absolute inset-0 z-0 overflow-hidden">
+            {/* Base: clean slate-50 to indigo-50 gradient */}
+            <div className="absolute inset-0" style={{
+                background: "linear-gradient(160deg, #f0f4ff 0%, #fafafe 30%, #fff7f0 60%, #f0fffe 100%)"
+            }} />
+
+            {/* Large soft color washes */}
+            <div className="absolute top-[-20%] right-[-10%] w-[700px] h-[700px] rounded-full pointer-events-none"
+                style={{ background: "radial-gradient(circle, rgba(99,102,241,0.10) 0%, transparent 65%)" }} />
+            <div className="absolute bottom-[-15%] left-[-10%] w-[650px] h-[650px] rounded-full pointer-events-none"
+                style={{ background: "radial-gradient(circle, rgba(0,184,169,0.10) 0%, transparent 65%)" }} />
+            <div className="absolute top-[35%] left-[40%] w-[500px] h-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none"
+                style={{ background: "radial-gradient(circle, rgba(249,115,22,0.07) 0%, transparent 65%)" }} />
+
+            {/* Floating geometric shapes */}
+            <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1440 900" fill="none" preserveAspectRatio="xMidYMid slice">
+                {/* Large rotated square — top left */}
+                <rect x="-60" y="60" width="220" height="220" rx="32"
+                    fill="none" stroke="rgba(99,102,241,0.12)" strokeWidth="1.5"
+                    transform="rotate(18 50 170)" />
+                <rect x="-30" y="90" width="160" height="160" rx="24"
+                    fill="rgba(99,102,241,0.04)"
+                    transform="rotate(18 50 170)" />
+
+                {/* Triangle-ish polygon — top right */}
+                <polygon points="1320,20 1420,140 1220,140"
+                    fill="rgba(0,184,169,0.05)" stroke="rgba(0,184,169,0.15)" strokeWidth="1.5" />
+
+                {/* Medium circle — mid left */}
+                <circle cx="60" cy="480" r="90"
+                    fill="none" stroke="rgba(249,115,22,0.12)" strokeWidth="1.5" strokeDasharray="6 8" />
+                <circle cx="60" cy="480" r="58"
+                    fill="rgba(249,115,22,0.04)" />
+
+                {/* Hexagon-ish — bottom right */}
+                <polygon points="1380,720 1430,790 1380,860 1310,860 1260,790 1310,720"
+                    fill="rgba(99,102,241,0.05)" stroke="rgba(99,102,241,0.13)" strokeWidth="1.5" />
+
+                {/* Small circles scattered */}
+                <circle cx="360" cy="80" r="18" fill="rgba(0,184,169,0.08)" />
+                <circle cx="380" cy="76" r="10" fill="none" stroke="rgba(0,184,169,0.18)" strokeWidth="1.2" />
+                <circle cx="1080" cy="820" r="22" fill="rgba(249,115,22,0.07)" />
+                <circle cx="1100" cy="816" r="12" fill="none" stroke="rgba(249,115,22,0.18)" strokeWidth="1.2" />
+                <circle cx="700" cy="50" r="12" fill="rgba(99,102,241,0.08)" />
+                <circle cx="720" cy="860" r="16" fill="rgba(0,184,169,0.08)" />
+
+                {/* Cross / plus marks */}
+                <line x1="880" y1="100" x2="880" y2="130" stroke="rgba(99,102,241,0.2)" strokeWidth="1.5" strokeLinecap="round" />
+                <line x1="865" y1="115" x2="895" y2="115" stroke="rgba(99,102,241,0.2)" strokeWidth="1.5" strokeLinecap="round" />
+                <line x1="200" y1="750" x2="200" y2="775" stroke="rgba(0,184,169,0.2)" strokeWidth="1.5" strokeLinecap="round" />
+                <line x1="187" y1="762" x2="213" y2="762" stroke="rgba(0,184,169,0.2)" strokeWidth="1.5" strokeLinecap="round" />
+                <line x1="1250" y1="300" x2="1250" y2="322" stroke="rgba(249,115,22,0.2)" strokeWidth="1.5" strokeLinecap="round" />
+                <line x1="1239" y1="311" x2="1261" y2="311" stroke="rgba(249,115,22,0.2)" strokeWidth="1.5" strokeLinecap="round" />
+
+                {/* Dotted arc — bottom center */}
+                <path d="M500 920 Q720 760 940 920"
+                    fill="none" stroke="rgba(99,102,241,0.12)" strokeWidth="1.5" strokeDasharray="5 9" />
+
+                {/* Dotted arc — top center */}
+                <path d="M440 -20 Q720 140 1000 -20"
+                    fill="none" stroke="rgba(0,184,169,0.12)" strokeWidth="1.5" strokeDasharray="5 9" />
+
+                {/* Thin diagonal lines */}
+                <line x1="0" y1="900" x2="200" y2="600" stroke="rgba(99,102,241,0.07)" strokeWidth="1" />
+                <line x1="1440" y1="0" x2="1240" y2="300" stroke="rgba(0,184,169,0.07)" strokeWidth="1" />
+                <line x1="600" y1="0" x2="800" y2="200" stroke="rgba(249,115,22,0.06)" strokeWidth="1" />
+
+                {/* Animated pulsing rings */}
+                <circle cx="1350" cy="200" r="40" fill="none" stroke="rgba(0,184,169,0.15)" strokeWidth="1">
+                    <animate attributeName="r" values="36;52;36" dur="4s" repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0.5;0.15;0.5" dur="4s" repeatCount="indefinite" />
+                </circle>
+                <circle cx="90" cy="700" r="30" fill="none" stroke="rgba(249,115,22,0.15)" strokeWidth="1">
+                    <animate attributeName="r" values="26;42;26" dur="5s" repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0.5;0.12;0.5" dur="5s" repeatCount="indefinite" />
+                </circle>
+            </svg>
+
+            {/* Fine dot texture */}
+            <div className="absolute inset-0 opacity-[0.025]" style={{
+                backgroundImage: "radial-gradient(circle at 1px 1px, #6366f1 1px, transparent 1px)",
+                backgroundSize: "28px 28px",
+            }} />
+
+            {/* Soft top & bottom section blends */}
+            <div className="absolute top-0 left-0 right-0 h-24 pointer-events-none"
+                style={{ background: "linear-gradient(to bottom, #f0f4ff, transparent)" }} />
+            <div className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none"
+                style={{ background: "linear-gradient(to top, #f0fffe, transparent)" }} />
+        </div>
+    );
+}
+
 export default function Results() {
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
-            transition: {
-                staggerChildren: 0.2,
-                delayChildren: 0.3,
-            },
+            transition: { staggerChildren: 0.2, delayChildren: 0.3 },
         },
     };
 
@@ -76,11 +169,7 @@ export default function Results() {
             opacity: 1,
             y: 0,
             scale: 1,
-            transition: {
-                type: "spring",
-                stiffness: 100,
-                damping: 15,
-            },
+            transition: { type: "spring", stiffness: 100, damping: 15 },
         },
     };
 
@@ -89,94 +178,20 @@ export default function Results() {
         visible: (i) => ({
             opacity: 1,
             x: 0,
-            transition: {
-                delay: i * 0.1,
-                duration: 0.5,
-            },
+            transition: { delay: i * 0.1, duration: 0.5 },
         }),
     };
 
     return (
-        <section className="py-24 relative bg-gradient-to-br from-[#fffbf5] via-white to-[#fef7ed] overflow-hidden">
-            {/* Animated Background Elements */}
-            <div className="absolute inset-0 z-0 overflow-hidden">
-                {/* Gradient Orbs */}
-                <div className="absolute top-20 left-10 w-96 h-96 bg-teal-300/10 rounded-full blur-3xl animate-pulse" />
-                <div className="absolute bottom-20 right-10 w-80 h-80 bg-orange-300/10 rounded-full blur-3xl animate-pulse delay-1000" />
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-pink-300/5 rounded-full blur-3xl" />
-
-                {/* Grid Pattern */}
-                <div 
-                    className="absolute inset-0 opacity-[0.03]"
-                    style={{
-                        backgroundImage: "radial-gradient(circle at 1px 1px, #00b8a9 1px, transparent 1px)",
-                        backgroundSize: "40px 40px",
-                    }}
-                />
-
-                {/* Animated Wave Lines */}
-                <svg
-                    className="absolute top-[-120px] left-0 w-full opacity-20"
-                    viewBox="0 0 1440 400"
-                    fill="none"
-                >
-                    <path
-                        d="M0 200 C300 50, 1100 50, 1440 200"
-                        stroke="#00b8a9"
-                        strokeWidth="2"
-                        strokeDasharray="10 10"
-                    >
-                        <animate attributeName="stroke-dashoffset" from="0" to="20" dur="3s" repeatCount="indefinite" />
-                    </path>
-                    <path
-                        d="M0 260 C300 120, 1100 120, 1440 260"
-                        stroke="#00b8a9"
-                        strokeWidth="1.5"
-                        opacity="0.5"
-                        strokeDasharray="8 8"
-                    >
-                        <animate attributeName="stroke-dashoffset" from="0" to="16" dur="4s" repeatCount="indefinite" />
-                    </path>
-                </svg>
-
-                <svg
-                    className="absolute bottom-[-150px] left-0 w-full opacity-15"
-                    viewBox="0 0 1440 400"
-                    fill="none"
-                >
-                    <path
-                        d="M0 200 C300 350, 1100 350, 1440 200"
-                        stroke="#f97316"
-                        strokeWidth="2"
-                        strokeDasharray="12 12"
-                    >
-                        <animate attributeName="stroke-dashoffset" from="0" to="-24" dur="5s" repeatCount="indefinite" />
-                    </path>
-                </svg>
-
-                {/* Diagonal Flow Lines */}
-                <svg
-                    className="absolute top-1/3 left-[-100px] w-[1600px] opacity-10 rotate-6"
-                    viewBox="0 0 1600 600"
-                    fill="none"
-                >
-                    <path
-                        d="M0 300 C400 100, 1200 100, 1600 300"
-                        stroke="#f43f8e"
-                        strokeWidth="1.5"
-                        strokeDasharray="6 6"
-                    >
-                        <animate attributeName="stroke-dashoffset" from="0" to="12" dur="6s" repeatCount="indefinite" />
-                    </path>
-                </svg>
-            </div>
+        <section className="py-24 relative overflow-hidden">
+            <ResultsBg />
 
             {/* Floating Elements */}
             <div className="absolute top-20 right-10 opacity-20 pointer-events-none">
-                <Zap size={40} className="text-teal-500 animate-pulse" />
+                <Zap size={40} className="text-indigo-500 animate-pulse" />
             </div>
             <div className="absolute bottom-20 left-10 opacity-15 pointer-events-none">
-                <Award size={32} className="text-orange-500 animate-bounce" style={{ animationDuration: "3s" }} />
+                <Award size={32} className="text-orange-400 animate-bounce" style={{ animationDuration: "3s" }} />
             </div>
 
             <div className="max-w-7xl mx-auto px-6 relative z-10">
@@ -188,22 +203,20 @@ export default function Results() {
                     viewport={{ once: true }}
                     className="text-center mb-16"
                 >
-                    {/* Badge */}
-                    <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full mb-6 border border-teal-200/50 shadow-sm">
+                    <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full mb-6 border border-teal-200/60 shadow-sm">
                         <div className="w-2 h-2 rounded-full bg-teal-500 animate-pulse" />
                         <span className="text-xs font-semibold text-teal-600 tracking-wide">PROVEN RESULTS</span>
                     </div>
 
                     <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4 tracking-tight">
-                        Results That 
+                        Results That
                         <span className="bg-gradient-to-r from-teal-500 to-cyan-500 bg-clip-text text-transparent"> Speak</span>
                     </h2>
-                    
+
                     <p className="text-gray-500 max-w-2xl mx-auto text-lg">
                         Real numbers. Real growth. Real impact. See how we've transformed businesses like yours.
                     </p>
 
-                    {/* Decorative Line */}
                     <div className="flex justify-center mt-8">
                         <div className="w-20 h-1 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full" />
                     </div>
@@ -222,17 +235,18 @@ export default function Results() {
                             key={c.client}
                             variants={cardVariants}
                             whileHover={{ y: -8 }}
-                            className="group relative bg-white rounded-3xl p-8 md:p-10 transition-all duration-300 hover:shadow-2xl"
+                            className="group relative bg-white/70 backdrop-blur-sm rounded-3xl p-8 md:p-10 transition-all duration-300 hover:shadow-2xl hover:bg-white/90"
                             style={{
-                                boxShadow: "0 10px 30px rgba(0,0,0,0.08), 0 20px 60px rgba(0,0,0,0.06)",
+                                boxShadow: "0 4px 24px rgba(99,102,241,0.07), 0 1px 4px rgba(0,0,0,0.04)",
+                                border: "1px solid rgba(255,255,255,0.9)",
                             }}
                         >
-                            {/* Animated Border Gradient */}
+                            {/* Hover border glow */}
                             <div
                                 className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                                 style={{
-                                    background: `linear-gradient(135deg, ${c.color}40, transparent)`,
-                                    padding: "2px",
+                                    background: `linear-gradient(135deg, ${c.color}30, transparent)`,
+                                    padding: "1.5px",
                                     mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
                                     WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
                                     WebkitMaskComposite: "xor",
@@ -240,22 +254,19 @@ export default function Results() {
                                 }}
                             />
 
-                            {/* Glow layer */}
+                            {/* Top color bar */}
                             <div
-                                className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-30 transition-opacity duration-500 pointer-events-none -z-10"
-                                style={{
-                                    background: `radial-gradient(circle at 50% 0%, ${c.color}20, transparent 70%)`,
-                                }}
+                                className="absolute top-0 left-8 right-8 h-[3px] rounded-b-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                                style={{ background: `linear-gradient(90deg, transparent, ${c.color}, transparent)` }}
                             />
 
                             <div className="grid lg:grid-cols-5 gap-8">
-                                {/* LEFT SIDE - Client Info */}
+                                {/* LEFT — Client Info */}
                                 <div className="lg:col-span-2">
-                                    {/* Client Header */}
                                     <div className="flex items-center gap-3 mb-4">
                                         <motion.div
-                                            className="w-14 h-14 rounded-xl flex items-center justify-center text-2xl"
-                                            style={{ background: `${c.color}15` }}
+                                            className="w-14 h-14 rounded-xl flex items-center justify-center text-2xl shadow-sm"
+                                            style={{ background: `${c.color}15`, border: `1px solid ${c.color}20` }}
                                             whileHover={{ scale: 1.1, rotate: 5 }}
                                         >
                                             {c.emoji}
@@ -266,7 +277,6 @@ export default function Results() {
                                         </div>
                                     </div>
 
-                                    {/* Service Badge */}
                                     <motion.div
                                         className="inline-block text-xs font-bold px-3 py-1.5 rounded-full mb-4"
                                         style={{
@@ -279,27 +289,16 @@ export default function Results() {
                                         {c.service}
                                     </motion.div>
 
-                                    {/* Challenge */}
                                     <div className="mb-4">
-                                        <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
-                                            Challenge
-                                        </div>
-                                        <p className="text-sm text-gray-600 leading-relaxed">
-                                            {c.challenge}
-                                        </p>
+                                        <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Challenge</div>
+                                        <p className="text-sm text-gray-600 leading-relaxed">{c.challenge}</p>
                                     </div>
 
-                                    {/* Solution */}
                                     <div className="mb-4">
-                                        <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
-                                            Solution
-                                        </div>
-                                        <p className="text-sm text-gray-600 leading-relaxed">
-                                            {c.solution}
-                                        </p>
+                                        <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Solution</div>
+                                        <p className="text-sm text-gray-600 leading-relaxed">{c.solution}</p>
                                     </div>
 
-                                    {/* Timeframe Badge */}
                                     <div className="flex items-center gap-2 mt-4">
                                         <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: `${c.color}10` }}>
                                             <TrendingUp size={14} style={{ color: c.color }} />
@@ -311,9 +310,8 @@ export default function Results() {
                                     </div>
                                 </div>
 
-                                {/* RIGHT SIDE - Results */}
+                                {/* RIGHT — Results */}
                                 <div className="lg:col-span-3">
-                                    {/* Results Header */}
                                     <div className="flex items-center gap-2 mb-6">
                                         <div className="w-6 h-6 rounded-full flex items-center justify-center" style={{ background: `${c.color}15` }}>
                                             <Zap size={12} style={{ color: c.color }} />
@@ -323,7 +321,6 @@ export default function Results() {
                                         </span>
                                     </div>
 
-                                    {/* Metrics Grid */}
                                     <div className="grid sm:grid-cols-3 gap-4 mb-6">
                                         {c.results.map((r, idx) => (
                                             <motion.div
@@ -336,46 +333,26 @@ export default function Results() {
                                                 className="relative p-4 rounded-xl transition-all duration-300 hover:scale-105"
                                                 style={{
                                                     background: `${c.color}06`,
-                                                    border: `1px solid ${c.color}15`,
+                                                    border: `1px solid ${c.color}18`,
                                                 }}
                                                 whileHover={{
                                                     background: `${c.color}12`,
-                                                    boxShadow: `0 4px 12px ${c.color}20`,
+                                                    boxShadow: `0 4px 16px ${c.color}25`,
                                                 }}
                                             >
-                                                {/* Metric Icon */}
                                                 <div className="flex items-center gap-2 mb-3">
                                                     <div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: `${c.color}15` }}>
                                                         <r.icon size={12} style={{ color: c.color }} />
                                                     </div>
                                                     <div className="text-xs font-medium text-gray-500">{r.metric}</div>
                                                 </div>
-
-                                                {/* Before Value */}
-                                                <div className="text-xs text-gray-400 line-through mb-1">
-                                                    {r.before}
-                                                </div>
-
-                                                {/* After Value */}
-                                                <div className="text-2xl font-bold text-gray-900 mb-1">
-                                                    {r.after}
-                                                </div>
-
-                                                {/* Change Percentage */}
+                                                <div className="text-xs text-gray-400 line-through mb-1">{r.before}</div>
+                                                <div className="text-2xl font-bold text-gray-900 mb-1">{r.after}</div>
                                                 <motion.div
                                                     className="text-xs font-bold inline-flex items-center gap-1 px-2 py-0.5 rounded-full"
-                                                    style={{
-                                                        background: `${c.color}15`,
-                                                        color: c.color,
-                                                    }}
-                                                    animate={{
-                                                        scale: [1, 1.05, 1],
-                                                    }}
-                                                    transition={{
-                                                        duration: 2,
-                                                        repeat: Infinity,
-                                                        delay: idx * 0.3,
-                                                    }}
+                                                    style={{ background: `${c.color}15`, color: c.color }}
+                                                    animate={{ scale: [1, 1.05, 1] }}
+                                                    transition={{ duration: 2, repeat: Infinity, delay: idx * 0.3 }}
                                                 >
                                                     <ArrowUpRight size={10} />
                                                     {r.change}
@@ -386,7 +363,7 @@ export default function Results() {
 
                                     {/* Testimonial */}
                                     <motion.div
-                                        className="relative p-5 rounded-xl mt-4 overflow-hidden"
+                                        className="relative p-5 rounded-xl overflow-hidden"
                                         style={{
                                             background: `linear-gradient(135deg, ${c.color}08, ${c.color}02)`,
                                             borderLeft: `3px solid ${c.color}`,
@@ -411,7 +388,7 @@ export default function Results() {
                                 </div>
                             </div>
 
-                            {/* Bottom Decorative Line */}
+                            {/* Bottom accent line */}
                             <motion.div
                                 className="absolute bottom-0 left-1/2 transform -translate-x-1/2 h-1 rounded-full"
                                 style={{
@@ -441,7 +418,7 @@ export default function Results() {
                             <ArrowUpRight size={16} className="inline ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                         </button>
                         <button className="text-gray-600 px-6 py-3 rounded-full font-semibold text-sm hover:text-teal-600 transition-colors">
-                           See Your Potential
+                            See Your Potential
                         </button>
                     </div>
                 </motion.div>

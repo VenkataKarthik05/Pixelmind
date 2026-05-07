@@ -143,6 +143,7 @@ const Logo = () => (
       <animate attributeName="opacity" values="0.8;0.3;0.8" dur="1.5s" delay="0.8s" repeatCount="indefinite" />
     </rect>
 
+
     {/* Left Column Squares */}
     <rect x="8" y="30" width="12" height="12" rx="2" fill="#14b8a6">
       <animate attributeName="opacity" values="1;0.4;1" dur="1.5s" delay="0.4s" repeatCount="indefinite" />
@@ -387,6 +388,7 @@ export default function SplashCurtain({ children, duration = 2600 }) {
             <circle cx="20" cy="100" r="3" fill="#14b8a6" />
           </svg>
         </div>
+       
 
         {/* Bottom Gradient Line */}
         <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-teal-400 to-transparent animate-[shimmer_2s_linear_infinite]" />
