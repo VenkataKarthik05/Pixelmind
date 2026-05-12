@@ -137,7 +137,7 @@ const CARDS = [
     desc: "We build systems that flex and grow alongside your ambitions.",
     pos: "bottom-0 left-8",
   },
-];
+];                                       
 
 export default function About() {
   return (

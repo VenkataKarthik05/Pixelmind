@@ -350,8 +350,8 @@ export default function Portfolio() {
           </div>
 
           <h1 className="anim-fadeUp" style={{animationDelay:"0.4s",fontFamily:"'Georgia',serif",fontSize:"clamp(2.8rem,7vw,5.5rem)",fontWeight:700,lineHeight:1.08,color:"#2a1e12",letterSpacing:"-0.02em",marginBottom:"1.5rem"}}>
-            Campaigns that
-            <span className="gold-shimmer" style={{display:"block"}}>move the needle.</span>
+            Our Work that
+            <span className="gold-shimmer" style={{display:"block"}}>Drives Real Results .</span>
           </h1>
 
           <p className="anim-fadeUp" style={{animationDelay:"0.55s",fontFamily:"system-ui,sans-serif",fontSize:"1.1rem",color:"#7a6652",maxWidth:480,margin:"0 auto 2.5rem",lineHeight:1.8}}>
