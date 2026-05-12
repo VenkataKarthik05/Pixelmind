@@ -58,7 +58,172 @@ const cases = [
     },
 ];
 
-/* ── Fresh Light Geometric Background ── */
+/* ─────────────────────────────────────────────
+   Faded background image layer
+   Uses real Unsplash photos that fit a
+   "growth / analytics / business" context.
+   All images are heavily masked so they never
+   overpower the original light geometric bg.
+───────────────────────────────────────────── */
+function BgImages() {
+    return (
+        <>
+            {/* ── TOP-LEFT: faint dashboard / analytics screenshot ── */}
+            <motion.div
+                className="absolute top-[-40px] left-[-60px] w-[420px] h-[320px] pointer-events-none select-none"
+                initial={{ opacity: 0, x: -30, y: -20 }}
+                animate={{ opacity: 1, x: 0, y: 0 }}
+                transition={{ duration: 1.8, ease: "easeOut" }}
+            >
+                <img
+                    src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=700&q=80&auto=format&fit=crop"
+                    alt=""
+                    aria-hidden="true"
+                    className="w-full h-full object-cover rounded-3xl"
+                    style={{
+                        opacity: 0.07,
+                        filter: "saturate(0.4) blur(1px)",
+                        maskImage: "radial-gradient(ellipse 70% 70% at 20% 20%, black 0%, transparent 80%)",
+                        WebkitMaskImage: "radial-gradient(ellipse 70% 70% at 20% 20%, black 0%, transparent 80%)",
+                    }}
+                />
+            </motion.div>
+
+            {/* ── TOP-RIGHT: faint rocket / growth concept ── */}
+            <motion.div
+                className="absolute top-[-20px] right-[-40px] w-[380px] h-[300px] pointer-events-none select-none"
+                initial={{ opacity: 0, x: 30, y: -20 }}
+                animate={{ opacity: 1, x: 0, y: 0 }}
+                transition={{ duration: 1.8, delay: 0.3, ease: "easeOut" }}
+            >
+                <img
+                    src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=700&q=80&auto=format&fit=crop"
+                    alt=""
+                    aria-hidden="true"
+                    className="w-full h-full object-cover rounded-3xl"
+                    style={{
+                        opacity: 0.08,
+                        filter: "saturate(0.3) blur(1.5px) hue-rotate(180deg)",
+                        maskImage: "radial-gradient(ellipse 70% 70% at 80% 20%, black 0%, transparent 80%)",
+                        WebkitMaskImage: "radial-gradient(ellipse 70% 70% at 80% 20%, black 0%, transparent 80%)",
+                    }}
+                />
+            </motion.div>
+
+            {/* ── MID-LEFT: faint team collaboration / office ── */}
+            <motion.div
+                className="absolute top-[30%] left-[-30px] w-[340px] h-[280px] pointer-events-none select-none"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 2, ease: "easeOut" }}
+                viewport={{ once: true }}
+            >
+                <img
+                    src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=700&q=80&auto=format&fit=crop"
+                    alt=""
+                    aria-hidden="true"
+                    className="w-full h-full object-cover rounded-3xl"
+                    style={{
+                        opacity: 0.06,
+                        filter: "saturate(0.2) blur(2px)",
+                        maskImage: "radial-gradient(ellipse 60% 80% at 10% 50%, black 0%, transparent 75%)",
+                        WebkitMaskImage: "radial-gradient(ellipse 60% 80% at 10% 50%, black 0%, transparent 75%)",
+                    }}
+                />
+            </motion.div>
+
+            {/* ── MID-RIGHT: faint bar chart / data viz ── */}
+            <motion.div
+                className="absolute top-[28%] right-[-20px] w-[360px] h-[300px] pointer-events-none select-none"
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 2, delay: 0.2, ease: "easeOut" }}
+                viewport={{ once: true }}
+            >
+                <img
+                    src="https://images.unsplash.com/photo-1543286386-713bdd548da4?w=700&q=80&auto=format&fit=crop"
+                    alt=""
+                    aria-hidden="true"
+                    className="w-full h-full object-cover rounded-3xl"
+                    style={{
+                        opacity: 0.07,
+                        filter: "saturate(0.3) blur(1.5px) hue-rotate(140deg)",
+                        maskImage: "radial-gradient(ellipse 60% 80% at 90% 50%, black 0%, transparent 75%)",
+                        WebkitMaskImage: "radial-gradient(ellipse 60% 80% at 90% 50%, black 0%, transparent 75%)",
+                    }}
+                />
+            </motion.div>
+
+            {/* ── CENTER: faint world map / global reach ── */}
+            <motion.div
+                className="absolute top-[42%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] pointer-events-none select-none"
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 2.5, ease: "easeOut" }}
+                viewport={{ once: true }}
+            >
+                <img
+                    src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=1200&q=80&auto=format&fit=crop"
+                    alt=""
+                    aria-hidden="true"
+                    className="w-full h-full object-cover rounded-3xl"
+                    style={{
+                        opacity: 0.045,
+                        filter: "saturate(0.2) blur(3px)",
+                        maskImage: "radial-gradient(ellipse 55% 55% at 50% 50%, black 0%, transparent 80%)",
+                        WebkitMaskImage: "radial-gradient(ellipse 55% 55% at 50% 50%, black 0%, transparent 80%)",
+                    }}
+                />
+            </motion.div>
+
+            {/* ── BOTTOM-LEFT: faint upward graph / growth ── */}
+            <motion.div
+                className="absolute bottom-[-30px] left-[-30px] w-[380px] h-[280px] pointer-events-none select-none"
+                initial={{ opacity: 0, x: -20, y: 20 }}
+                whileInView={{ opacity: 1, x: 0, y: 0 }}
+                transition={{ duration: 2, ease: "easeOut" }}
+                viewport={{ once: true }}
+            >
+                <img
+                    src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=700&q=80&auto=format&fit=crop"
+                    alt=""
+                    aria-hidden="true"
+                    className="w-full h-full object-cover rounded-3xl"
+                    style={{
+                        opacity: 0.07,
+                        filter: "saturate(0.25) blur(2px)",
+                        maskImage: "radial-gradient(ellipse 70% 70% at 15% 85%, black 0%, transparent 75%)",
+                        WebkitMaskImage: "radial-gradient(ellipse 70% 70% at 15% 85%, black 0%, transparent 75%)",
+                    }}
+                />
+            </motion.div>
+
+            {/* ── BOTTOM-RIGHT: faint handshake / success ── */}
+            <motion.div
+                className="absolute bottom-[-20px] right-[-30px] w-[360px] h-[280px] pointer-events-none select-none"
+                initial={{ opacity: 0, x: 20, y: 20 }}
+                whileInView={{ opacity: 1, x: 0, y: 0 }}
+                transition={{ duration: 2, delay: 0.3, ease: "easeOut" }}
+                viewport={{ once: true }}
+            >
+                <img
+                    src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=700&q=80&auto=format&fit=crop"
+                    alt=""
+                    aria-hidden="true"
+                    className="w-full h-full object-cover rounded-3xl"
+                    style={{
+                        opacity: 0.06,
+                        filter: "saturate(0.2) blur(2px)",
+                        maskImage: "radial-gradient(ellipse 70% 70% at 85% 85%, black 0%, transparent 75%)",
+                        WebkitMaskImage: "radial-gradient(ellipse 70% 70% at 85% 85%, black 0%, transparent 75%)",
+                    }}
+                />
+            </motion.div>
+        </>
+    );
+}
+
+/* ── Original light geometric background — UNCHANGED ── */
 function ResultsBg() {
     return (
         <div className="absolute inset-0 z-0 overflow-hidden">
@@ -66,6 +231,9 @@ function ResultsBg() {
             <div className="absolute inset-0" style={{
                 background: "linear-gradient(160deg, #f0f4ff 0%, #fafafe 30%, #fff7f0 60%, #f0fffe 100%)"
             }} />
+
+            {/* Faded background images — sit above base, below geometry */}
+            <BgImages />
 
             {/* Large soft color washes */}
             <div className="absolute top-[-20%] right-[-10%] w-[700px] h-[700px] rounded-full pointer-events-none"
